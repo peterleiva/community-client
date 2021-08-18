@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "npm run prettier -- --check",
+    "format:check": "npm run prettier -- --write",
+    "prettier": "prettier --ignore-path .gitignore \".\""
   },
   "dependencies": {
     "next": "11.1.0",
@@ -17,6 +20,9 @@
     "@types/react": "17.0.18",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "prettier": "^2.3.2",
     "typescript": "4.3.5"
   }
 }
