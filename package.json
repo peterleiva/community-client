@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "npm run prettier -- --check",
-    "format:check": "npm run prettier -- --write",
+    "format": "npm run prettier -- --write",
+    "format:check": "npm run prettier -- --check",
     "prettier": "prettier --ignore-path .gitignore \".\""
   },
   "dependencies": {
