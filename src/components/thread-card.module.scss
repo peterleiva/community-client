@@ -1,0 +1,52 @@
+$border-color: rgba(27, 22, 22, 22%);
+
+.card {
+  display: grid;
+  grid-template-columns: 5% auto;
+  gap: 2em;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
+  background: #fff;
+
+  .interaction {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    button {
+      background-color: none;
+    }
+  }
+
+  .container {
+    header {
+      display: flex;
+      flex-direction: column-reverse;
+
+      .author {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 14px;
+
+        > .username {
+          color: purple;
+        }
+      }
+    }
+  }
+
+  footer {
+    border-top: 1px solid $border-color;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 1rem 0.5rem;
+  }
+}
