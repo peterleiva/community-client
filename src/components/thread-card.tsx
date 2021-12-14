@@ -19,16 +19,15 @@ export default function ThreadCard({
   activity,
   participants,
 }: ThreadProps) {
-  console.log("styles", styles);
   return (
     <article className={styles.card}>
       <div className={styles.interaction}>
-        <button>
+        <button name="up-vote">
           <FontAwesomeIcon icon={faChevronUp} />
         </button>
         {replies}
-        <button>
-          <FontAwesomeIcon icon={faChevronDown} size="sm" />
+        <button name="down-vote">
+          <FontAwesomeIcon icon={faChevronDown} />
         </button>
       </div>
       <div className={styles.container}>
@@ -37,11 +36,11 @@ export default function ThreadCard({
           <div className={styles.author}>
             <Avatar {...op.author} />
             Posted by
-            <span className={styles.username}> {op.author.username}</span>
+            <b className={styles.username}> {op.author.username}</b>
           </div>
         </header>
 
-        <section className="card-content">
+        <section className={styles.content}>
           <p>{op.message}</p>
         </section>
 

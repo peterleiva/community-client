@@ -1,24 +1,25 @@
-$border-color: rgba(27, 22, 22, 22%);
+@use "styles-rhythm/common";
+@use "styles-rhythm/rhythm";
 
 .card {
   display: grid;
-  grid-template-columns: 5% auto;
-  gap: 2em;
-  border: 1px solid $border-color;
-  border-radius: 12px;
-  padding: 20px;
+  grid-template-columns: 2vw auto;
+  gap: var(--space-2-lines);
+  border: common.rem(1) solid var(--gray-5);
+  border-radius: var(--space-xs);
+  padding: var(--space-lg);
   width: 100%;
-  background: #fff;
+  background: var(--color-background-1);
 
   .interaction {
-    font-size: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-xs);
 
     button {
-      background-color: none;
+      @include rhythm.type-scale(lg);
+      border: none;
     }
   }
 
@@ -30,23 +31,34 @@ $border-color: rgba(27, 22, 22, 22%);
       .author {
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
         flex-wrap: nowrap;
         align-items: center;
-        gap: 14px;
+        gap: var(--space-sm);
 
         > .username {
-          color: purple;
+          color: var(--color-accent);
         }
       }
+    }
+
+    header,
+    header > .author,
+    .content {
+      margin-bottom: var(--space-1-line);
+    }
+
+    h1,
+    .card-content {
+      word-wrap: anywhere;
     }
   }
 
   footer {
-    border-top: 1px solid $border-color;
+    @include rhythm.padding(1);
+
+    border-top: common.rem(1) solid var(--gray-5);
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    padding: 1rem 0.5rem;
   }
 }
