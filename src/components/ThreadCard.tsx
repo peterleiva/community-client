@@ -1,14 +1,14 @@
 import React from "react";
 import { Thread as IThread } from "types";
-import Avatar from "./avatar";
-import ThreadParticipantsCard from "./thread-participants-card";
+import Avatar from "./Avatar";
+import ThreadParticipantsCard from "./ThreadParticipantsCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faComment,
   faChevronUp,
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
-import styles from "./thread-card.module.scss";
+import styles from "./ThreadCard.module.scss";
 
 type ThreadProps = IThread;
 

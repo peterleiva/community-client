@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "styles/Home.module.scss";
 import { useState } from "react";
 
-import ThreadCard from "components/thread-card";
+import ThreadCard from "components/ThreadCard";
 import { Thread } from "types";
 
 export default function Home() {
