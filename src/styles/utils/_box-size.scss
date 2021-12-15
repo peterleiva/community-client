@@ -1,0 +1,7 @@
+///
+// shortcut for applying width and height by default
+///
+@mixin box-size($width, $height: $width) {
+  height: $height;
+  width: $width;
+}
