@@ -3,5 +3,9 @@
     "stylelint-config-standard-scss",
     "stylelint-config-sass-guidelines",
     "stylelint-config-prettier"
-  ]
+  ],
+
+  "rules": {
+    "max-nesting-depth": 2
+  }
 }
