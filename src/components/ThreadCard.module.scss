@@ -2,14 +2,14 @@
 @use "styles-rhythm/rhythm";
 
 .card {
-  display: grid;
-  grid-template-columns: 2vw auto;
-  gap: var(--space-2-lines);
+  background: var(--color-background-1);
   border: common.rem(1) solid var(--gray-5);
   border-radius: var(--space-xs);
+  display: grid;
+  gap: var(--space-2-lines);
+  grid-template-columns: 2vw auto;
   padding: var(--space-lg);
   width: 100%;
-  background: var(--color-background-1);
 
   .container {
     header {
@@ -17,10 +17,9 @@
       flex-direction: column-reverse;
 
       .author {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
         align-items: center;
+        display: flex;
+        flex-flow: row nowrap;
         gap: var(--space-sm);
 
         > .username {
@@ -46,7 +45,6 @@
 
     border-top: common.rem(1) solid var(--gray-5);
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-flow: row nowrap;
   }
 }

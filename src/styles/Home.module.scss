@@ -2,10 +2,10 @@
 @use "styles-rhythm/common";
 
 .container {
-  min-height: 100vh;
-  display: grid;
-  padding: 0 clamp(1vw, 3vw, var(--space-xxs));
   background: #f9f9f9;
+  display: grid;
+  min-height: 100vh;
+  padding: 0 clamp(1vw, 3vw, var(--space-xxs));
 
   @media screen and (min-width: common.breakpoints("pug")) {
     padding: 0 8vw;
@@ -17,8 +17,8 @@
 }
 
 .main {
+  align-items: center;
   display: flex;
   flex-direction: column;
   gap: var(--space-default);
-  align-items: center;
 }
