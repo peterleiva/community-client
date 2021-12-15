@@ -1,13 +1,8 @@
 import React from "react";
 import { Thread as IThread } from "types";
 import Avatar from "./Avatar";
+import VoteButton from "./VoteButton";
 import ThreadParticipantsCard from "./ThreadParticipantsCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faComment,
-  faChevronUp,
-  faChevronDown,
-} from "@fortawesome/free-solid-svg-icons";
 import styles from "./ThreadCard.module.scss";
 
 type ThreadProps = IThread;
@@ -22,13 +17,7 @@ export default function ThreadCard({
   return (
     <article className={styles.card}>
       <div className={styles.interaction}>
-        <button name="up-vote">
-          <FontAwesomeIcon icon={faChevronUp} />
-        </button>
-        {replies}
-        <button name="down-vote">
-          <FontAwesomeIcon icon={faChevronDown} />
-        </button>
+        <VoteButton votes={replies} />
       </div>
       <div className={styles.container}>
         <header>

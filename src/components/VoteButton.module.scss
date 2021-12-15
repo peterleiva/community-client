@@ -1,0 +1,35 @@
+@use "styles-rhythm/rhythm";
+@use "styles-rhythm/common";
+@use "styles/utils";
+
+.group {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    @extend %reset-button;
+    @include rhythm.type-scale(default);
+    @include rhythm.padding(0.5);
+    @include utils.box-size(common.$touchable-area);
+
+    cursor: pointer;
+    transition: 100ms;
+  }
+
+  button:disabled {
+    visibility: hidden;
+  }
+
+  &.voted {
+    &.down,
+    button {
+      color: var(--color-danger);
+    }
+
+    &.up button {
+      color: var(--color-info);
+    }
+  }
+}
