@@ -4,12 +4,15 @@
 .card {
   background: var(--color-background-1);
   border: common.rem(1) solid var(--gray-5);
-  border-radius: var(--space-xs);
   display: grid;
   gap: var(--space-2-lines);
   grid-template-columns: 2vw auto;
   padding: var(--space-lg);
   width: 100%;
+
+  @media screen and (min-width: common.breakpoints("pug")) {
+    border-radius: var(--space-xs);
+  }
 
   .container {
     header {

@@ -5,10 +5,9 @@
   background: #f9f9f9;
   display: grid;
   min-height: 100vh;
-  padding: 0 clamp(1vw, 3vw, var(--space-xxs));
 
   @media screen and (min-width: common.breakpoints("pug")) {
-    padding: 0 8vw;
+    padding: 0 clamp(1vw, 8vw, var(--space-jumbo));
   }
 
   @media screen and (min-width: common.breakpoints("saint-bernard")) {
