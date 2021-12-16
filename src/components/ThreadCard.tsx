@@ -4,6 +4,7 @@ import Avatar from "./Avatar";
 import VoteButton from "./VoteButton";
 import ThreadParticipantsCard from "./ThreadParticipantsCard";
 import styles from "./ThreadCard.module.scss";
+import RelativeTime from "./RelativeTime";
 
 type ThreadProps = IThread;
 
@@ -35,7 +36,7 @@ export default function ThreadCard({
 
         <footer>
           <span>
-            Last Activity <time>{activity.toDateString()}</time>
+            Last Activity <RelativeTime time={activity} />
           </span>
           <span>{replies}</span>
           <ThreadParticipantsCard participants={participants} />
