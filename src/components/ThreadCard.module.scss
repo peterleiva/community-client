@@ -26,7 +26,7 @@
         gap: var(--space-sm);
 
         > .username {
-          color: var(--color-accent);
+          color: var(--color-link);
         }
       }
     }
@@ -46,8 +46,42 @@
   footer {
     @include rhythm.padding(1);
 
+    align-items: center;
     border-top: common.rem(1) solid var(--gray-5);
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
+    gap: var(--space-default);
+    justify-content: space-between;
+
+    @media screen and (min-width: common.breakpoints(bulldog)) {
+      flex-direction: row;
+    }
+
+    .activity {
+      color: var(--color-white);
+    }
+
+    .participants {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      gap: var(--space-default);
+      justify-content: center;
+
+      > a {
+        align-items: center;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: var(--space-xs);
+        justify-content: center;
+        transition: 100ms;
+
+        @media (hover: hover) {
+          &:hover {
+            color: var(--color-link);
+          }
+        }
+      }
+    }
   }
 }

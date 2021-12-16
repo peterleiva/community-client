@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { Thread as IThread } from "types";
 import Avatar from "./Avatar";
@@ -5,10 +6,13 @@ import VoteButton from "./VoteButton";
 import ThreadParticipantsCard from "./ThreadParticipantsCard";
 import styles from "./ThreadCard.module.scss";
 import RelativeTime from "./RelativeTime";
+import { FaRegComment } from "react-icons/fa";
+import NumberFormatCompact from "./NumberFormatCompact";
 
 type ThreadProps = IThread;
 
 export default function ThreadCard({
+  id,
   title,
   op,
   replies,
@@ -35,11 +39,19 @@ export default function ThreadCard({
         </section>
 
         <footer>
-          <span>
+          <span className={styles.activity}>
             Last Activity <RelativeTime time={activity} />
           </span>
-          <span>{replies}</span>
-          <ThreadParticipantsCard participants={participants} />
+          <div className={styles.participants}>
+            <Link href={`/thread/${id}#replies`} passHref>
+              <a href="dummy">
+                <NumberFormatCompact value={replies} />
+                <FaRegComment />
+              </a>
+            </Link>
+
+            <ThreadParticipantsCard participants={participants} />
+          </div>
         </footer>
       </div>
     </article>
