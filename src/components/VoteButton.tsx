@@ -1,6 +1,9 @@
-import React, { useState, useReducer, MouseEventHandler } from "react";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useReducer, MouseEventHandler } from "react";
+import {
+  FaChevronUp as UpVoteIcon,
+  FaChevronDown as DownVoteIcon,
+} from "react-icons/fa";
+import NumberFormatCompact from "./NumberFormatCompact";
 import styles from "./VoteButton.module.scss";
 
 type VoteButtonProps = {
@@ -59,8 +62,6 @@ export default function VoteButton({
     votes,
   });
 
-  const formatter = Intl.NumberFormat(undefined, { notation: "compact" });
-
   const handleUpVote: MouseEventHandler<HTMLButtonElement> = () => {
     setVote({ type: Actions.UP });
     onUpVote?.(interaction.votes);
@@ -81,21 +82,17 @@ export default function VoteButton({
   return (
     <div className={classNames.join(" ")}>
       <button name="upvote" onClick={handleUpVote} disabled={interaction.down}>
-        <FontAwesomeIcon icon={faChevronUp} />
+        <UpVoteIcon />
       </button>
 
-      <span>
-        {interaction.votes === 0
-          ? "\u{2501}"
-          : formatter.format(interaction.votes)}
-      </span>
+      <NumberFormatCompact value={interaction.votes} zeroToken={"\u{2501}"} />
 
       <button
         name="downvote"
         onClick={handleDownVote}
         disabled={interaction.up}
       >
-        <FontAwesomeIcon icon={faChevronDown} />
+        <DownVoteIcon />
       </button>
     </div>
   );
