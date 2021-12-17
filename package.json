@@ -2,6 +2,9 @@
   "name": "community-client",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=12.22.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,27 +13,34 @@
     "lint:stylelint": "stylelint \"./src/**/*.?(s)css\"",
     "format": "npm run prettier -- --write",
     "format:check": "npm run prettier -- --check",
-    "prettier": "prettier --ignore-path .gitignore \".\""
+    "prettier": "prettier --ignore-path .gitignore \".\"",
+    "test": "npm run jest",
+    "test:watch": "npm test -- --watch",
+    "jest": "jest"
   },
   "dependencies": {
     "@apollo/client": "^3.4.8",
     "estileira": "^0.4.0",
     "graphql": "^15.5.1",
     "luxon": "^2.2.0",
-    "next": "^11.1.1",
+    "next": "^12.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "sass": "^1.45.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
     "@types/luxon": "^2.0.8",
     "@types/react": "^17.0.30",
     "eslint": "7.32.0",
     "eslint-config-next": "^11.1.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
+    "jest": "^27.4.5",
     "prettier": "^2.3.2",
+    "react-test-renderer": "^17.0.2",
     "stylelint": "^14.1.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-sass-guidelines": "^9.0.1",
