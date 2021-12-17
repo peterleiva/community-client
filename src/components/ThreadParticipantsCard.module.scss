@@ -1,0 +1,12 @@
+@use "estileira/common";
+
+$stacks: 3;
+$scale-factor: 0.7;
+
+.stack {
+  cursor: pointer;
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--space-xxs);
+  justify-content: center;
+}

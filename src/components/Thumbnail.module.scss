@@ -1,0 +1,21 @@
+@use "estileira/common";
+
+.avatar {
+  align-items: center;
+  background: var(--light);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+
+  &.framed {
+    border: common.rem(2) solid var(--gray-3) !important;
+    padding: 5% !important;
+    transition: padding 200ms ease-out;
+
+    @media screen and (hover: hover) {
+      &:hover {
+        padding: 0 !important;
+      }
+    }
+  }
+}

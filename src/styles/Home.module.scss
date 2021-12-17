@@ -1,0 +1,23 @@
+@use "estileira/rhythm";
+@use "estileira/common";
+
+.container {
+  background: #f9f9f9;
+  display: grid;
+  min-height: 100vh;
+
+  @media screen and (min-width: common.breakpoints("pug")) {
+    padding: 0 clamp(1vw, 8vw, var(--space-jumbo));
+  }
+
+  @media screen and (min-width: common.breakpoints("saint-bernard")) {
+    padding: 0 30vw;
+  }
+}
+
+.main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-default);
+}

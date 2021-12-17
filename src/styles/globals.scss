@@ -1,0 +1,10 @@
+@use "estileira";
+
+:root {
+  --color-link: var(--color-accent);
+}
+
+html,
+body {
+  overflow: scroll !important;
+}

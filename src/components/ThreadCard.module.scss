@@ -1,0 +1,95 @@
+@use "estileira/common";
+@use "estileira/rhythm";
+
+.card {
+  background: var(--color-background-1);
+  border: common.rem(1) solid var(--gray-5);
+  display: grid;
+  gap: var(--space-2-lines);
+  grid-template-columns: 2vw auto;
+  padding: var(--space-lg);
+  width: 100%;
+
+  @media screen and (min-width: common.breakpoints("pug")) {
+    border-radius: var(--space-xs);
+  }
+
+  .container {
+    header {
+      display: flex;
+      flex-direction: column-reverse;
+
+      .author {
+        align-items: center;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: var(--space-sm);
+
+        > .username {
+          color: var(--color-link);
+        }
+      }
+    }
+
+    header,
+    header > .author,
+    .content {
+      margin-bottom: var(--space-1-line);
+    }
+
+    h1,
+    .card-content {
+      word-wrap: anywhere;
+    }
+  }
+
+  footer {
+    @include rhythm.padding(1);
+
+    align-items: center;
+    border-top: common.rem(1) solid var(--gray-5);
+    display: flex;
+    flex-flow: column nowrap;
+    gap: var(--space-default);
+    justify-content: space-between;
+
+    @media screen and (min-width: common.breakpoints(bulldog)) {
+      flex-direction: row;
+    }
+
+    .activity {
+      color: var(--color-white);
+    }
+
+    .participants {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-default);
+      justify-content: center;
+
+      > a {
+        align-items: center;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: var(--space-xs);
+        justify-content: center;
+        transition: 100ms;
+
+        .icon {
+          @include rhythm.type-scale(2);
+        }
+      }
+
+      @media screen and (min-width: common.breakpoints(pug)) {
+        flex-direction: row;
+      }
+
+      @media (hover: hover) {
+        > a:hover {
+          color: var(--color-link);
+        }
+      }
+    }
+  }
+}
