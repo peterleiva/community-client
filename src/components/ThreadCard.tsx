@@ -1,13 +1,13 @@
 import Link from "next/link";
 import React from "react";
+import { FaRegComment } from "react-icons/fa";
 import { Thread as IThread } from "types";
-import Avatar from "./Avatar";
+import Thumbnail from "./Thumbnail";
 import VoteButton from "./VoteButton";
 import ThreadParticipantsCard from "./ThreadParticipantsCard";
-import styles from "./ThreadCard.module.scss";
 import RelativeTime from "./RelativeTime";
-import { FaRegComment } from "react-icons/fa";
 import NumberFormatCompact from "./NumberFormatCompact";
+import styles from "./ThreadCard.module.scss";
 
 type ThreadProps = IThread;
 
@@ -28,7 +28,7 @@ export default function ThreadCard({
         <header>
           <h1>{title}</h1>
           <div className={styles.author}>
-            <Avatar {...op.author} />
+            <Thumbnail user={op.author} />
             Posted by
             <b className={styles.username}> {op.author.username}</b>
           </div>

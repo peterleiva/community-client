@@ -64,7 +64,7 @@
     .participants {
       align-items: center;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       gap: var(--space-default);
       justify-content: center;
 
@@ -75,11 +75,15 @@
         gap: var(--space-xs);
         justify-content: center;
         transition: 100ms;
+      }
 
-        @media (hover: hover) {
-          &:hover {
-            color: var(--color-link);
-          }
+      @media screen and (min-width: common.breakpoints(pug)) {
+        flex-direction: row;
+      }
+
+      @media (hover: hover) {
+        > a:hover {
+          color: var(--color-link);
         }
       }
     }
