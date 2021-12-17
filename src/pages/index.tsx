@@ -1,9 +1,9 @@
 import Head from "next/head";
 import styles from "styles/Home.module.scss";
 import { useState } from "react";
-
 import ThreadCard from "components/ThreadCard";
 import { Thread } from "types";
+import { DateTime } from "luxon";
 
 export default function Home() {
   const [state, setState] = useState(0);
@@ -12,10 +12,23 @@ export default function Home() {
     {
       id: "1",
       title: "Título ?",
-      activity: new Date(),
+      activity: DateTime.now().minus({ months: 2 }).toJSDate(),
       createdAt: new Date(),
       updatedAt: new Date(),
-      participants: [],
+      participants: [
+        {
+          id: "1",
+          username: "shov",
+        },
+        {
+          id: "2",
+          username: "jau",
+        },
+        {
+          id: "3",
+          username: "chokingloskid",
+        },
+      ],
       replies: 1,
       op: {
         id: "id",
@@ -33,7 +46,16 @@ export default function Home() {
       activity: new Date(),
       createdAt: new Date(),
       updatedAt: new Date(),
-      participants: [],
+      participants: [
+        {
+          id: "1",
+          username: "shov",
+        },
+        {
+          id: "2",
+          username: "jau",
+        },
+      ],
       replies: 100_000,
       op: {
         id: "id",
@@ -53,7 +75,12 @@ export default function Home() {
       activity: new Date(),
       createdAt: new Date(),
       updatedAt: new Date(),
-      participants: [],
+      participants: [
+        {
+          id: "1",
+          username: "shov",
+        },
+      ],
       replies: 100_000,
       op: {
         id: "id",

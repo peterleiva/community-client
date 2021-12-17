@@ -75,6 +75,10 @@
         gap: var(--space-xs);
         justify-content: center;
         transition: 100ms;
+
+        .icon {
+          @include rhythm.type-scale(2);
+        }
       }
 
       @media screen and (min-width: common.breakpoints(pug)) {

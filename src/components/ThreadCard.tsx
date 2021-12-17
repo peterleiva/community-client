@@ -46,7 +46,7 @@ export default function ThreadCard({
             <Link href={`/thread/${id}#replies`} passHref>
               <a href="dummy">
                 <NumberFormatCompact value={replies} />
-                <FaRegComment />
+                <FaRegComment className={styles.icon} />
               </a>
             </Link>
 
