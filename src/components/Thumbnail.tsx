@@ -50,8 +50,6 @@ export default function Thumbnail({
         src={user?.avatar ?? `https://picsum.photos/${size}/${size}`}
         width={size}
         height={size}
-        placeholder="blur"
-        blurDataURL="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII= "
         alt={`thumbnail of ${user?.username} avatar`}
         className={className}
         {...all}
