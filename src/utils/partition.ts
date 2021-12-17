@@ -1,10 +1,10 @@
-type PartitionTuple<T> = [T[], T[]];
+type Partitions<T> = [T[], T[]];
+interface Predicate<T> {
+  (partitions: Partitions<T>, current: T): boolean;
+}
 
-export default function partition<T>(
-  array: T[],
-  predicate: (partition: PartitionTuple<T>, current: T) => boolean
-): PartitionTuple<T> {
-  return array.reduce<PartitionTuple<T>>(
+function partition<T>(array: T[], predicate: Predicate<T>): Partitions<T> {
+  return array.reduce<Partitions<T>>(
     (prev, current) => {
       const [first, second] = prev;
 
@@ -19,3 +19,5 @@ export default function partition<T>(
     [[], []]
   );
 }
+
+export default partition;
