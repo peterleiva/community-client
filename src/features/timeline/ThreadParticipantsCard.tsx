@@ -1,8 +1,8 @@
 import React from "react";
 import { User } from "types";
-import Thumbnail, { ThumbnailSize } from "./Thumbnail";
-import styles from "./ThreadParticipantsCard.module.scss";
+import { Thumbnail, ThumbnailSize } from "components";
 import { partition } from "utils";
+import styles from "./ThreadParticipantsCard.module.scss";
 
 type ParticipantsProps = {
   participants: User[];

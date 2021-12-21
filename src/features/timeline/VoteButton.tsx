@@ -3,7 +3,7 @@ import {
   FaChevronUp as UpVoteIcon,
   FaChevronDown as DownVoteIcon,
 } from "react-icons/fa";
-import NumberFormatCompact from "./NumberFormatCompact";
+import { NumberFormatCompact } from "components";
 import styles from "./VoteButton.module.scss";
 
 type VoteButtonProps = {

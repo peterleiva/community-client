@@ -1,6 +1,6 @@
 import type { GetServerSideProps } from "next";
 import Head from "next/head";
-import Timeline from "components/Timeline";
+import { Timeline } from "features/timeline";
 import { ThreadMapper, ThreadConnection, createApolloClient } from "lib";
 import styles from "styles/Home.module.scss";
 import { gql } from "@apollo/client";

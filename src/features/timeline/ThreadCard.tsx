@@ -1,15 +1,13 @@
 import Link from "next/link";
 import React from "react";
 import { FaRegComment } from "react-icons/fa";
-import { Thread as IThread } from "types";
-import Thumbnail from "./Thumbnail";
+import type { Thread } from "types";
+import { RelativeTime, NumberFormatCompact, Thumbnail } from "components";
 import VoteButton from "./VoteButton";
 import ThreadParticipantsCard from "./ThreadParticipantsCard";
-import RelativeTime from "./RelativeTime";
-import NumberFormatCompact from "./NumberFormatCompact";
 import styles from "./ThreadCard.module.scss";
 
-type ThreadProps = IThread;
+type ThreadProps = Thread;
 
 export default function ThreadCard({
   id,
