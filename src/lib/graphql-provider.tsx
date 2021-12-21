@@ -1,4 +1,5 @@
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
+import { createApolloClient } from "./apollo-client";
 
 type GraphQLProviderProps = {
   children: React.ReactNode | React.ReactNode[] | null;
@@ -7,12 +8,7 @@ type GraphQLProviderProps = {
 export default function GraphQLProvider({
   children,
 }: GraphQLProviderProps): JSX.Element {
-  const cache = new InMemoryCache();
-
-  const client = new ApolloClient({
-    uri: process.env.API_ENDPOINT,
-    cache,
-  });
+  const client = createApolloClient();
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 }
