@@ -1,100 +1,17 @@
+import type { GetServerSideProps } from "next";
 import Head from "next/head";
+import Timeline from "components/Timeline";
+import { ThreadMapper, ThreadConnection, createApolloClient } from "lib";
 import styles from "styles/Home.module.scss";
-import { useState } from "react";
-import ThreadCard from "components/ThreadCard";
-import { Thread } from "types";
-import { DateTime } from "luxon";
+import { gql } from "@apollo/client";
 
-export default function Home() {
-  const [state, setState] = useState(0);
+type HomeProps = {
+  data: ThreadConnection;
+};
 
-  const threads: Thread[] = [
-    {
-      id: "1",
-      title: "Título ?",
-      activity: DateTime.now().minus({ months: 2 }).toJSDate(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      participants: [
-        {
-          id: "1",
-          username: "shov",
-        },
-        {
-          id: "2",
-          username: "jau",
-        },
-        {
-          id: "3",
-          username: "chokingloskid",
-        },
-      ],
-      replies: 1,
-      op: {
-        id: "id",
-        author: {
-          id: "id",
-          username: "carolalels",
-        },
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    },
-    {
-      id: "2",
-      title: new Array(155).fill("A").join(""),
-      activity: new Date(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      participants: [
-        {
-          id: "1",
-          username: "shov",
-        },
-        {
-          id: "2",
-          username: "jau",
-        },
-      ],
-      replies: 100_000,
-      op: {
-        id: "id",
-        message:
-          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error deserunt at debitis non rem nobis ex inventore! Quidem accusantium ullam pariatur amet, iste voluptates. Quaerat impedit facere officiis nam libero.",
-        author: {
-          id: "id",
-          username: "carolalels",
-        },
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    },
-    {
-      id: "3",
-      title: "Título",
-      activity: new Date(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      participants: [
-        {
-          id: "1",
-          username: "shov",
-        },
-      ],
-      replies: 100_000,
-      op: {
-        id: "id",
-        message:
-          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error deserunt at debitis non rem nobis ex inventore! Quidem accusantium ullam pariatur amet, iste voluptates. Quaerat impedit facere officiis nam libero. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error deserunt at debitis non rem nobis ex inventore! Quidem accusantium ullam pariatur amet, iste voluptates. Quaerat impedit facere officiis nam libero. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error deserunt at debitis non rem nobis ex inventore! Quidem accusantium ullam pariatur amet, iste voluptates. Quaerat impedit facere officiis nam libero. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error deserunt at debitis non rem nobis ex inventore! Quidem accusantium ullam pariatur amet, iste voluptates. Quaerat impedit facere officiis nam libero. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error deserunt at debitis non rem nobis ex inventore! Quidem accusantium ullam pariatur amet, iste voluptates. Quaerat impedit facere officiis nam libero. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error deserunt at debitis non rem nobis ex inventore! Quidem accusantium ullam pariatur amet, iste voluptates. Quaerat impedit facere officiis nam libero.",
-        author: {
-          id: "id",
-          username: "carolalels",
-        },
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    },
-  ];
+export default function Home({ data }: { data: ThreadConnection }) {
+  const mapper = new ThreadMapper();
+  const threads = data.edges.map(({ node }) => mapper.toObject(node)) ?? [];
 
   return (
     <div className={styles.container}>
@@ -104,10 +21,61 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        {threads.map(thread => (
-          <ThreadCard key={thread.id} {...thread} />
-        ))}
+        <Timeline threads={threads} />
       </main>
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
+  const client = createApolloClient();
+  const { data, error } = await client.query<{
+    threads: ThreadConnection;
+  }>({
+    query: GET_THREADS,
+  });
+
+  return {
+    props: { data: data.threads },
+    notFound: !!error,
+  };
+};
+
+const GET_THREADS = gql`
+  query GetThreads {
+    threads {
+      edges {
+        node {
+          id
+          title
+          lastActivity
+          replies
+
+          participants {
+            edges {
+              node {
+                id
+                avatar
+              }
+            }
+            interactions
+          }
+
+          post {
+            id
+            message
+            likes
+
+            author {
+              id
+              avatar
+              name {
+                nick
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
