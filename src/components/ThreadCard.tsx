@@ -14,7 +14,7 @@ type ThreadProps = IThread;
 export default function ThreadCard({
   id,
   title,
-  op,
+  post,
   replies,
   activity,
   participants,
@@ -22,20 +22,20 @@ export default function ThreadCard({
   return (
     <article className={styles.card}>
       <div className={styles.interaction}>
-        <VoteButton votes={replies} />
+        <VoteButton votes={post.likes} />
       </div>
       <div className={styles.container}>
         <header>
           <h1>{title}</h1>
           <div className={styles.author}>
-            <Thumbnail user={op.author} />
+            <Thumbnail user={post.author} />
             Posted by
-            <b className={styles.username}> {op.author.username}</b>
+            <b className={styles.username}> {post.author.username}</b>
           </div>
         </header>
 
         <section className={styles.content}>
-          <p>{op.message}</p>
+          <p>{post.message}</p>
         </section>
 
         <footer>
