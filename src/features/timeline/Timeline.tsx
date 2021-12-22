@@ -1,4 +1,5 @@
 import type { Thread } from "types";
+import EmptyState from "./EmptyState";
 import ThreadCard from "./ThreadCard";
 
 type TimelineProps = {
@@ -6,6 +7,10 @@ type TimelineProps = {
 };
 
 export default function Timeline({ threads }: TimelineProps): JSX.Element {
+  if (threads.length == 0) {
+    return <EmptyState />;
+  }
+
   return (
     <>
       {threads.map(thread => (

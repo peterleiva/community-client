@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="380px" height="315px" viewBox="0 0 380 315" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>image</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#BEDB65" offset="0%"></stop>
+            <stop stop-color="#FC9A93" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#F04848" offset="0%"></stop>
+            <stop stop-color="#D8D8D8" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#9CBEEC" offset="0%"></stop>
+            <stop stop-color="#50EF8D" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#7C45E0" offset="0%"></stop>
+            <stop stop-color="#FA79F8" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-5">
+            <stop stop-color="#AEF7E6" offset="0%"></stop>
+            <stop stop-color="#EDB776" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="73.0304857%" x2="56.1316896%" y2="-5.79926766%" id="linearGradient-6">
+            <stop stop-color="#E5B420" offset="0%"></stop>
+            <stop stop-color="#E80D0D" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Página-Inicial" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Empty-State" transform="translate(-529.000000, -165.000000)">
+            <g id="image" transform="translate(529.000000, 165.000000)">
+                <g id="topic-3" transform="translate(205.879896, 246.001691) rotate(5.000000) translate(-205.879896, -246.001691) translate(36.691450, 191.541891)">
+                    <rect id="container" stroke-opacity="0.275244653" stroke="#4B5863" fill="#FFFFFF" x="0.5" y="0.5" width="337.376891" height="107.9196" rx="7"></rect>
+                    <g id="participants" transform="translate(257.050256, 49.376885)">
+                        <path d="M48.2711864,0 C57.7045268,0 65.3517601,8.12749434 65.3517601,18.1532667 C65.3517601,28.179039 57.7045268,36.3065334 48.2711864,36.3065334 C42.408981,36.3065334 37.2365364,33.1678483 34.1604431,28.3854053 C36.0357442,25.4720395 37.1316819,21.9486758 37.1316819,18.1532667 C37.1316819,14.3578576 36.0357442,10.8344939 34.1618515,7.92112807 C37.2365364,3.13868505 42.408981,0 48.2711864,0 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+                        <ellipse id="Oval" fill="url(#linearGradient-2)" cx="17.0805737" cy="18.1532667" rx="17.0805737" ry="18.1532667"></ellipse>
+                    </g>
+                    <rect id="top" fill-opacity="0.387476781" fill="#5C5A66" x="29.0452267" y="26.140704" width="190.246235" height="21.78392" rx="2"></rect>
+                    <rect id="bottom" fill-opacity="0.52538721" fill="#413F4A" x="27.5929654" y="59.5427147" width="92.9447254" height="21.78392" rx="2"></rect>
+                </g>
+                <g id="topic-2" transform="translate(167.394970, 149.426313) rotate(9.000000) translate(-167.394970, -149.426313) translate(6.193962, 97.144904)">
+                    <rect id="container" stroke-opacity="0.275244653" stroke="#4B5863" fill="#FFFFFF" x="0.5" y="0.5" width="321.402016" height="103.562816" rx="7"></rect>
+                    <g id="participants" transform="translate(243.979904, 47.924624)">
+                        <path d="M46.1258004,6.82121026e-13 C55.1398811,6.82121026e-13 62.4472374,7.80239456 62.4472374,17.427136 C62.4472374,27.0518775 55.1398811,34.854272 46.1258004,34.854272 C40.5247828,34.854272 35.5827181,31.8418287 32.6432172,27.2515759 C34.4337594,24.4544373 35.4813849,21.0714178 35.4813849,17.427136 C35.4813849,13.7828542 34.4337594,10.3998347 32.6425309,7.6026961 C35.5827181,3.01244337 40.5247828,6.82121026e-13 46.1258004,6.82121026e-13 Z" id="Combined-Shape" fill="url(#linearGradient-3)"></path>
+                        <ellipse id="Oval" fill="url(#linearGradient-4)" cx="16.321437" cy="17.427136" rx="16.321437" ry="17.427136"></ellipse>
+                    </g>
+                    <rect id="bottom" fill-opacity="0.387476781" fill="#5C5A66" x="27.5929654" y="56.6381921" width="181.532667" height="20.3316587" rx="2"></rect>
+                    <rect id="top" fill-opacity="0.52538721" fill="#413F4A" x="26.140704" y="26.140704" width="88.5879414" height="20.3316587" rx="2"></rect>
+                </g>
+                <g id="topic-1" transform="translate(194.261805, 59.386110) rotate(3.000000) translate(-194.261805, -59.386110) translate(29.430144, 8.556963)">
+                    <rect id="container" stroke-opacity="0.275244653" stroke="#4B5863" fill="#FFFFFF" x="0.5" y="0.5" width="328.663323" height="100.658293" rx="7"></rect>
+                    <g id="participants" transform="translate(249.788950, 46.472363)">
+                        <path d="M47.1984934,4.54747351e-13 C56.4222039,4.54747351e-13 63.8994987,7.47729479 63.8994987,16.7010054 C63.8994987,25.9247159 56.4222039,33.4020107 47.1984934,33.4020107 C41.4667836,33.4020107 36.4094538,30.5146466 33.4016754,26.1150897 C35.2348121,23.434693 36.3065334,20.1930061 36.3065334,16.7010054 C36.3065334,13.2090046 35.2348121,9.96731772 33.402346,7.28692101 C36.4094538,2.88736413 41.4667836,4.54747351e-13 47.1984934,4.54747351e-13 Z" id="Combined-Shape" fill="url(#linearGradient-5)"></path>
+                        <circle id="Oval" fill="url(#linearGradient-6)" cx="16.7010054" cy="16.7010054" r="16.7010054"></circle>
+                    </g>
+                    <rect id="bottom" fill-opacity="0.387476781" fill="#5C5A66" x="27.5929654" y="55.1859307" width="110.371861" height="20.3316587" rx="2"></rect>
+                    <rect id="top" fill-opacity="0.52538721" fill="#413F4A" x="27.5929654" y="24.6884427" width="79.8743734" height="20.3316587" rx="2"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
