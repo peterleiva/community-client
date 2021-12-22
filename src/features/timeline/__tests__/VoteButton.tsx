@@ -1,16 +1,15 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
 import VoteButton from "../VoteButton";
 
 describe("VoteButton", () => {
   const votes = 10;
 
   test("up voting", () => {
-    render(<VoteButton votes={votes} />);
+    const { getByText, getAllByRole } = render(<VoteButton votes={votes} />);
 
-    const voteText = screen.getByText(votes);
-    const [upButton, downButton] = screen.getAllByRole("button");
+    const voteText = getByText(votes);
+    const [upButton, downButton] = getAllByRole("button");
 
     userEvent.click(upButton);
 
@@ -19,10 +18,10 @@ describe("VoteButton", () => {
   });
 
   test("down voting", () => {
-    render(<VoteButton votes={votes} />);
+    const { getByText, getAllByRole } = render(<VoteButton votes={votes} />);
 
-    const voteText = screen.getByText(votes);
-    const [upButton, downButton] = screen.getAllByRole("button");
+    const voteText = getByText(votes);
+    const [upButton, downButton] = getAllByRole("button");
 
     userEvent.click(downButton);
 
@@ -31,15 +30,15 @@ describe("VoteButton", () => {
   });
 
   test("zero votes gives special character", () => {
-    render(<VoteButton votes={0} />);
-    expect(() => screen.getByText("\u{2501}")).not.toThrow();
+    const { getByText, getAllByRole } = render(<VoteButton votes={0} />);
+    expect(() => getByText("\u{2501}")).not.toThrow();
   });
 
   test("take vote back", () => {
-    render(<VoteButton votes={votes} />);
+    const { getByText, getAllByRole } = render(<VoteButton votes={votes} />);
 
-    const voteText = screen.getByText(votes);
-    const [upButton, downButton] = screen.getAllByRole("button");
+    const voteText = getByText(votes);
+    const [upButton, downButton] = getAllByRole("button");
 
     userEvent.click(upButton);
     userEvent.click(upButton);
