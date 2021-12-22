@@ -1,0 +1,11 @@
+.state {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-sm);
+  text-align: center;
+
+  header {
+    margin: var(--space-lg) 0;
+  }
+}
