@@ -1,6 +1,7 @@
 import Image, { ImageProps } from "next/image";
 import React from "react";
 import { User } from "types";
+import { applyClasses } from "lib";
 import styles from "./Thumbnail.module.scss";
 
 export enum ThumbnailSize {
@@ -30,17 +31,15 @@ export default function Thumbnail({
   className = "",
   ...all
 }: ThumbnailProps): JSX.Element {
-  const css: string[] = className.split(" ").concat(styles.avatar);
+  let css = applyClasses(className, styles.avatar);
 
   if (framed) {
-    css.push(styles.framed);
+    css = applyClasses(css, styles.framed);
   }
-
-  className = css.join(" ");
 
   if (children) {
     return (
-      <div className={className} style={{ width: size, height: size }}>
+      <div className={css} style={{ width: size, height: size }}>
         <span>{children}</span>
       </div>
     );
@@ -51,7 +50,7 @@ export default function Thumbnail({
         width={size}
         height={size}
         alt={`thumbnail of ${user?.username} avatar`}
-        className={className}
+        className={css}
         {...all}
       />
     );
