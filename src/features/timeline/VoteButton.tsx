@@ -81,14 +81,19 @@ export default function VoteButton({
 
   return (
     <div className={classNames.join(" ")}>
-      <button name="upvote" onClick={handleUpVote} disabled={interaction.down}>
+      <button
+        aria-label="upvote"
+        name="upvote"
+        onClick={handleUpVote}
+        disabled={interaction.down}
+      >
         <UpVoteIcon />
       </button>
 
       <NumberFormatCompact value={interaction.votes} zeroToken={"\u{2501}"} />
 
       <button
-        name="downvote"
+        aria-label="downvote"
         onClick={handleDownVote}
         disabled={interaction.up}
       >
