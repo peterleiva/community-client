@@ -9,7 +9,11 @@ const custom = {
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
 
   testEnvironment: "jest-environment-jsdom",
-  moduleDirectories: ["node_modules", path.resolve(__dirname, "src")],
+  moduleDirectories: [
+    "node_modules",
+    path.resolve(__dirname),
+    path.resolve(__dirname, "src"),
+  ],
 
   watchPlugins: [
     "jest-watch-typeahead/filename",
