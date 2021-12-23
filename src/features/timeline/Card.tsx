@@ -5,7 +5,7 @@ import type { Thread } from "types";
 import { RelativeTime, NumberFormatCompact, Thumbnail } from "components";
 import VoteButton from "./VoteButton";
 import ThreadParticipantsCard from "./ThreadParticipantsCard";
-import styles from "./ThreadCard.module.scss";
+import styles from "./Card.module.scss";
 
 type ThreadProps = Thread;
 
