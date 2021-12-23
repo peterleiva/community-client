@@ -4,7 +4,7 @@ import { FaRegComment } from "react-icons/fa";
 import type { Thread } from "types";
 import { RelativeTime, NumberFormatCompact, Thumbnail } from "components";
 import VoteButton from "./VoteButton";
-import ThreadParticipantsCard from "./ThreadParticipantsCard";
+import ParticipantsList from "./ParticipantsList";
 import styles from "./Card.module.scss";
 
 type ThreadProps = Thread;
@@ -48,7 +48,7 @@ export default function ThreadCard({
               </a>
             </Link>
 
-            <ThreadParticipantsCard participants={participants} />
+            <ParticipantsList participants={participants} />
           </div>
         </footer>
       </div>
