@@ -8,14 +8,14 @@ import pkg from "../../package.json";
 
 export function createApolloClient(): ApolloClient<NormalizedCacheObject> {
   const cache = new InMemoryCache();
-  const uri = process.env.API_ENDPOINT;
+  const uri = process.env.NEXT_PUBLIC_API_ENDPOINT;
 
   const client = new ApolloClient({
-    ssrMode: true,
+    ssrMode: typeof window === "undefined",
     name: "Web App",
     version: pkg.version,
-    uri,
     cache,
+    uri,
   });
 
   return client;
