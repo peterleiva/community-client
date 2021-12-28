@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.6",
-    "estileira": "^0.4.0",
+    "estileira": "^0.5.0",
     "graphql": "^15.8.0",
     "luxon": "^2.2.0",
     "next": "^12.0.7",
