@@ -12,7 +12,7 @@ export default function CaughUp({ title, lastActivity }: CaughUpProps) {
   return (
     <div className={styles.container}>
       <div>
-        <h1>{title && "You are caugh up"}</h1>
+        <h1>{title ?? "You are caugh up"}</h1>
         <p>
           <RelativeTime time={lastActivity} />
         </p>
