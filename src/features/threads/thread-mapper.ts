@@ -7,16 +7,16 @@ import { UserMapper, UserDTO } from "lib/user-mapper";
 
 export type ThreadConnection = Connection<ThreadDTO>;
 
-interface ParticipantsConnection extends Connection<UserDTO> {
-  interactions: number;
-}
-
 export interface ThreadDTO extends Node {
   title: string;
   replies: number;
   post: PostDTO;
   lastActivity: string;
   participants: ParticipantsConnection;
+}
+
+interface ParticipantsConnection extends Connection<UserDTO> {
+  interactions: number;
 }
 
 export class ThreadMapper implements mapperDTO<ThreadDTO, Thread> {

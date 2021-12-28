@@ -1,8 +1,9 @@
-import { ApolloError, gql, useQuery } from "@apollo/client";
+import { ApolloError, useQuery } from "@apollo/client";
 import { useReducer } from "react";
 import type { Cursor } from "types";
 import type { Thread } from "./types";
 import { ThreadMapper, ThreadConnection } from "./thread-mapper";
+import { GET_THREADS, PageVariables, GetThreadsQuery } from "./graphql";
 
 type Hook<T> = {
   loading: boolean;
@@ -12,50 +13,6 @@ type Hook<T> = {
   clear: () => void;
   nextPage: () => void;
 };
-
-export const GET_THREADS = gql`
-  query GetThreads($page: ForwardPageInput) {
-    threads(page: $page) {
-      pageInfo {
-        endCursor
-        hasNextPage
-      }
-
-      edges {
-        node {
-          id
-          title
-          lastActivity
-          replies
-
-          participants {
-            edges {
-              node {
-                id
-                avatar
-              }
-            }
-            interactions
-          }
-
-          post {
-            id
-            message
-            likes
-
-            author {
-              id
-              avatar
-              name {
-                nick
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 
 export function mapper(data?: { threads: ThreadConnection }): Thread[] {
   const mapper = new ThreadMapper();
@@ -111,17 +68,6 @@ function pageLoader(state: PageState, action: PageActions): PageState {
   }
 }
 
-type ThreadQuery = {
-  threads: ThreadConnection;
-};
-
-type ThreadQueryVariables = {
-  page: {
-    first?: number;
-    after?: Cursor;
-  };
-};
-
 type UseThreadOptions = {
   sample?: number;
   startCursor?: Cursor;
@@ -137,7 +83,7 @@ export function useThreads({
     cursor: startCursor,
   });
 
-  const { loading, data, error } = useQuery<ThreadQuery, ThreadQueryVariables>(
+  const { loading, data, error } = useQuery<GetThreadsQuery, PageVariables>(
     GET_THREADS,
     {
       variables: {

@@ -2,7 +2,7 @@ import Head from "next/head";
 import type { GetServerSideProps } from "next";
 import { Timeline } from "features/timeline";
 import {
-  getThreads,
+  listThreads,
   ThreadConnection,
   mapper,
   useThreads,
@@ -40,10 +40,17 @@ export default function Home({ initialData }: HomeProps) {
 }
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-  const { data, error } = await getThreads();
+  try {
+    const data = await listThreads();
 
-  return {
-    props: { initialData: data },
-    notFound: !!error,
-  };
+    return {
+      props: { initialData: data },
+    };
+  } catch (err) {
+    console.error(err);
+
+    return {
+      notFound: true,
+    };
+  }
 };
