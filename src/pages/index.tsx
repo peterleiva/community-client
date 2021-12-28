@@ -1,17 +1,21 @@
-import type { GetServerSideProps } from "next";
 import Head from "next/head";
+import type { GetServerSideProps } from "next";
+import type { ThreadConnection } from "lib";
 import { Timeline } from "features/timeline";
-import { ThreadMapper, ThreadConnection, createApolloClient } from "lib";
+import useThreads, { mapper } from "hooks/use-threads";
+import { getThreads } from "hooks/get-threads";
 import styles from "styles/Home.module.scss";
-import { gql } from "@apollo/client";
 
 type HomeProps = {
-  data: ThreadConnection;
+  initialData: ThreadConnection;
 };
 
-export default function Home({ data }: { data: ThreadConnection }) {
-  const mapper = new ThreadMapper();
-  const threads = data.edges.map(({ node }) => mapper.toObject(node)) ?? [];
+export default function Home({ initialData }: HomeProps) {
+  const { loading, caughUp, data, nextPage, error } = useThreads({
+    startCursor: initialData.pageInfo.endCursor,
+  });
+
+  const threads = mapper({ threads: initialData }).concat(data);
 
   return (
     <div className={styles.container}>
@@ -21,61 +25,22 @@ export default function Home({ data }: { data: ThreadConnection }) {
       </Head>
 
       <main className={styles.main}>
-        <Timeline threads={threads} />
+        <Timeline
+          threads={threads}
+          loading={loading}
+          caughUp={caughUp}
+          onNextPage={nextPage}
+        />
       </main>
     </div>
   );
 }
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-  const client = createApolloClient();
-  const { data, error } = await client.query<{
-    threads: ThreadConnection;
-  }>({
-    query: GET_THREADS,
-  });
+  const { data, error } = await getThreads();
 
   return {
-    props: { data: data.threads },
+    props: { initialData: data },
     notFound: !!error,
   };
 };
-
-const GET_THREADS = gql`
-  query GetThreads {
-    threads {
-      edges {
-        node {
-          id
-          title
-          lastActivity
-          replies
-
-          participants {
-            edges {
-              node {
-                id
-                avatar
-              }
-            }
-            interactions
-          }
-
-          post {
-            id
-            message
-            likes
-
-            author {
-              id
-              avatar
-              name {
-                nick
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
