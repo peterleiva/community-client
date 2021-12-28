@@ -40,19 +40,3 @@ export interface User extends Timestamps {
   avatar?: Image;
   username: string;
 }
-
-export interface Post extends Timestamps {
-  id: ID;
-  message?: string;
-  author: User;
-  likes: number;
-}
-
-export interface Thread extends Timestamps {
-  id: ID;
-  title: string;
-  post: Post;
-  participants: User[];
-  activity: DateTime;
-  replies: number;
-}

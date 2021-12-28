@@ -1,7 +1,8 @@
 import { ApolloError, gql, useQuery } from "@apollo/client";
-import { ThreadConnection, ThreadMapper } from "lib";
 import { useReducer } from "react";
-import { Cursor, Thread } from "types";
+import type { Cursor } from "types";
+import type { Thread } from "./types";
+import { ThreadMapper, ThreadConnection } from "./thread-mapper";
 
 type Hook<T> = {
   loading: boolean;
@@ -126,7 +127,7 @@ type UseThreadOptions = {
   startCursor?: Cursor;
 };
 
-export default function useThreads({
+export function useThreads({
   sample,
   startCursor,
 }: UseThreadOptions = {}): Hook<Thread[]> {

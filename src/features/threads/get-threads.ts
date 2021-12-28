@@ -1,5 +1,6 @@
 import { ApolloError } from "@apollo/client";
-import { createApolloClient, ThreadConnection } from "lib";
+import { ThreadConnection } from "./thread-mapper";
+import { createApolloClient } from "lib/apollo-client";
 import { Cursor } from "types";
 import { GET_THREADS } from "./use-threads";
 

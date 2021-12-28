@@ -1,6 +1,7 @@
-import type { Node, Post } from "types";
-import { fromISODate, mapperDTO } from "./mapper";
-import { UserMapper, UserDTO } from "./user-mapper";
+import type { Node } from "types";
+import type { Post } from "./types";
+import { fromISODate, mapperDTO } from "lib/mapper";
+import { UserMapper, UserDTO } from "lib/user-mapper";
 
 export interface PostDTO extends Node {
   message?: string;

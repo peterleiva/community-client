@@ -1,9 +1,12 @@
 import Head from "next/head";
 import type { GetServerSideProps } from "next";
-import type { ThreadConnection } from "lib";
 import { Timeline } from "features/timeline";
-import useThreads, { mapper } from "hooks/use-threads";
-import { getThreads } from "hooks/get-threads";
+import {
+  getThreads,
+  ThreadConnection,
+  mapper,
+  useThreads,
+} from "features/threads";
 import styles from "styles/Home.module.scss";
 
 type HomeProps = {
