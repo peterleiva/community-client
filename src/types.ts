@@ -7,7 +7,7 @@ export type Cursor = string;
 
 export type Connection<T extends Node> = {
   edges: EdgeConnection<T>;
-  pageInfo?: PageInfo;
+  pageInfo: PageInfo;
 };
 
 export type PageInfo = {
