@@ -4,8 +4,8 @@ import { Timeline } from "features/timeline";
 import {
   listThreads,
   ThreadConnection,
-  mapper,
   useThreads,
+  getThreadsMapper,
 } from "features/threads";
 import styles from "styles/Home.module.scss";
 
@@ -14,11 +14,11 @@ type HomeProps = {
 };
 
 export default function Home({ initialData }: HomeProps) {
-  const { loading, caughUp, data, nextPage, error } = useThreads({
+  const { loading, caughUp, data, nextPage } = useThreads({
     startCursor: initialData.pageInfo.endCursor,
   });
 
-  const threads = mapper({ threads: initialData }).concat(data);
+  const threads = getThreadsMapper({ threads: initialData }).concat(data);
 
   return (
     <div className={styles.container}>
