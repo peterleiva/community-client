@@ -1,21 +1,22 @@
-import type { Thread } from "types";
+import type { Cursor, Thread } from "types";
 import EmptyState from "./EmptyState";
 import Card from "./Card";
+import styles from "./Timeline.module.scss";
 
 type TimelineProps = {
-  threads: Thread[];
+  threads?: Thread[];
 };
 
-export default function Timeline({ threads }: TimelineProps): JSX.Element {
+export default function Timeline({ threads = [] }: TimelineProps): JSX.Element {
   if (threads.length == 0) {
     return <EmptyState />;
   }
 
   return (
-    <>
+    <div className={styles.timeline}>
       {threads.map(thread => (
         <Card key={thread.id} {...thread} />
       ))}
-    </>
+    </div>
   );
 }
