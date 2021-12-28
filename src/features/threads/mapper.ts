@@ -1,12 +1,9 @@
 import { ThreadMapper, ThreadConnection } from "./thread-mapper";
 import type { Thread } from "./types";
 
-export function getThreadsMapper(data?: {
-  threads: ThreadConnection;
-}): Thread[] {
+export function threadsConnectionMapper(data?: ThreadConnection): Thread[] {
   const mapper = new ThreadMapper();
-  const threads =
-    data?.threads?.edges?.map(({ node }) => mapper.toObject(node)) ?? [];
+  const threads = data?.edges?.map(({ node }) => mapper.toObject(node)) ?? [];
 
   return threads;
 }

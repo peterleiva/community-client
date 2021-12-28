@@ -1,24 +1,15 @@
 import Head from "next/head";
 import type { GetServerSideProps } from "next";
 import { Timeline } from "features/timeline";
-import {
-  listThreads,
-  ThreadConnection,
-  useThreads,
-  getThreadsMapper,
-} from "features/threads";
+import { listThreads, ThreadConnection, useThreads } from "features/threads";
 import styles from "styles/Home.module.scss";
 
 type HomeProps = {
-  initialData: ThreadConnection;
+  threads: ThreadConnection;
 };
 
-export default function Home({ initialData }: HomeProps) {
-  const { loading, caughUp, data, nextPage } = useThreads({
-    startCursor: initialData.pageInfo.endCursor,
-  });
-
-  const threads = getThreadsMapper({ threads: initialData }).concat(data);
+export default function Home({ threads }: HomeProps) {
+  const { loading, caughUp, data, nextPage } = useThreads({ threads });
 
   return (
     <div className={styles.container}>
@@ -29,7 +20,7 @@ export default function Home({ initialData }: HomeProps) {
 
       <main className={styles.main}>
         <Timeline
-          threads={threads}
+          threads={data}
           loading={loading}
           caughUp={caughUp}
           onNextPage={nextPage}
@@ -44,7 +35,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
     const data = await listThreads();
 
     return {
-      props: { initialData: data },
+      props: { threads: data },
     };
   } catch (err) {
     console.error(err);

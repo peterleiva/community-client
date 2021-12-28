@@ -60,11 +60,19 @@ function pageLoader<T>(
   }
 }
 
-export default function usePageLoader<T>(startCursor?: Cursor) {
+type Options<T> = {
+  startCursor?: Cursor;
+  data?: T[];
+};
+
+export default function usePageLoader<T>({
+  startCursor,
+  data = [],
+}: Options<T> = {}) {
   const [state, dispatch] = useReducer<Reducer<PageState<T>, PageAction<T>>>(
     pageLoader,
     {
-      data: [],
+      data,
       caughUp: false,
       cursor: startCursor,
     }
