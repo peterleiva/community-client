@@ -7,6 +7,10 @@ Each log entry can be in the following kind: **Added**[^1], **Changed**[^2], **D
 
 ## [Unreleased]
 
+### Added
+
+- Privacy focused analytics with [Umami](https://umami.is/)
+
 ## [0.2.0] - 2021-12-22
 
 ### Added
