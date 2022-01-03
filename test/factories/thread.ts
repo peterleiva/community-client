@@ -1,7 +1,7 @@
 import { Factory } from "fishery";
 import casual from "casual";
 import { DateTime } from "luxon";
-import { Thread } from "types";
+import type { Thread } from "features/threads";
 import PostFactory from "./post";
 import UserFactory from "./user";
 

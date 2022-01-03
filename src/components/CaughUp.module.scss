@@ -1,0 +1,20 @@
+@use "estileira/common";
+@use "estileira/rhythm";
+
+.container {
+  align-items: center;
+  border: common.rem(1) solid var(--dark);
+  border-style: solid none;
+  display: flex;
+  flex-flow: column;
+  gap: var(--space-default);
+  margin: var(--space-default);
+  padding: var(--space-xs);
+  position: relative;
+  text-align: center;
+
+  h1,
+  .icon {
+    @include rhythm.type-scale(xxl);
+  }
+}

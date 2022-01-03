@@ -4,6 +4,7 @@ $stacks: 3;
 $scale-factor: 0.7;
 
 .stack {
+  align-items: center;
   cursor: pointer;
   display: flex;
   flex-flow: row wrap;

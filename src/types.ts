@@ -7,7 +7,7 @@ export type Cursor = string;
 
 export type Connection<T extends Node> = {
   edges: EdgeConnection<T>;
-  pageInfo?: PageInfo;
+  pageInfo: PageInfo;
 };
 
 export type PageInfo = {
@@ -39,20 +39,4 @@ export interface User extends Timestamps {
   id: ID;
   avatar?: Image;
   username: string;
-}
-
-export interface Post extends Timestamps {
-  id: ID;
-  message?: string;
-  author: User;
-  likes: number;
-}
-
-export interface Thread extends Timestamps {
-  id: ID;
-  title: string;
-  post: Post;
-  participants: User[];
-  activity: DateTime;
-  replies: number;
 }

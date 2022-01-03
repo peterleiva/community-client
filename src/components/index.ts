@@ -4,3 +4,4 @@ export { default as Thumbnail, ThumbnailSize } from "./Thumbnail";
 export { default as RelativeTime } from "./RelativeTime";
 export { default as EmptyState } from "./EmptyState";
 export { default as Button } from "./Button";
+export { default as CaughUp } from "./CaughUp";

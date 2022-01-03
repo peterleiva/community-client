@@ -1,14 +1,11 @@
-import { Thread, Connection, Node, User, Post } from "types";
+import { Connection, Node, User } from "types";
+import type { Thread } from "./types";
 import { DateTime } from "luxon";
-import { fromISODate, mapperDTO } from "./mapper";
+import { fromISODate, mapperDTO } from "lib/mapper";
 import { PostMapper, PostDTO } from "./post-mapper";
-import { UserMapper, UserDTO } from "./user-mapper";
+import { UserMapper, UserDTO } from "lib/user-mapper";
 
 export type ThreadConnection = Connection<ThreadDTO>;
-
-interface ParticipantsConnection extends Connection<UserDTO> {
-  interactions: number;
-}
 
 export interface ThreadDTO extends Node {
   title: string;
@@ -16,6 +13,10 @@ export interface ThreadDTO extends Node {
   post: PostDTO;
   lastActivity: string;
   participants: ParticipantsConnection;
+}
+
+interface ParticipantsConnection extends Connection<UserDTO> {
+  interactions: number;
 }
 
 export class ThreadMapper implements mapperDTO<ThreadDTO, Thread> {
