@@ -1,5 +1,5 @@
 import { Factory } from "fishery";
-import { Post } from "types";
+import { Post } from "features/threads";
 import casual from "casual";
 import UserFactory from "./user";
 

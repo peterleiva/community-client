@@ -1,4 +1,4 @@
-import type { Thread } from "types";
+import type { Thread } from "features/threads";
 import { Button, CaughUp } from "components";
 import EmptyState from "./EmptyState";
 import Card from "./Card";
@@ -6,9 +6,9 @@ import styles from "./Timeline.module.scss";
 
 type TimelineProps = {
   threads?: Thread[];
-  caughUp: boolean;
-  loading: boolean;
-  onNextPage: () => void;
+  caughUp?: boolean;
+  loading?: boolean;
+  onNextPage?: () => void;
 };
 
 export default function Timeline({
@@ -31,10 +31,10 @@ export default function Timeline({
         {caughUp && (
           <CaughUp lastActivity={threads[threads.length - 1].activity} />
         )}
-        {!caughUp && (
+        {!caughUp && !loading && (
           <Button
             renderContainer={props => (
-              <button {...props} onClick={onNextPage}>
+              <button {...props} onClick={() => onNextPage?.()}>
                 Load more
               </button>
             )}
