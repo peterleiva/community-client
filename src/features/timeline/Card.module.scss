@@ -19,6 +19,12 @@
       display: flex;
       flex-direction: column-reverse;
 
+      h1 {
+        @include rhythm.type-scale(xl);
+
+        font-weight: bold;
+      }
+
       .author {
         align-items: center;
         display: flex;

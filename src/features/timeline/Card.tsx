@@ -1,6 +1,11 @@
 import Link from "next/link";
 import type { Thread } from "features/threads";
-import { RelativeTime, NumberFormatCompact, Thumbnail } from "components";
+import {
+  RelativeTime,
+  NumberFormatCompact,
+  Thumbnail,
+  ThumbnailSize,
+} from "components";
 import { FaRegComment } from "react-icons/fa";
 import VoteButton from "./VoteButton";
 import ParticipantsList from "./ParticipantsList";
@@ -25,7 +30,7 @@ export default function ThreadCard({
         <header>
           <h1>{title}</h1>
           <div className={styles.author}>
-            <Thumbnail user={post.author} />
+            <Thumbnail user={post.author} size={ThumbnailSize.TINY} />
             Posted by
             <b className={styles.username}> {post.author.username}</b>
           </div>
