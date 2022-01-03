@@ -1,8 +1,7 @@
 import Link from "next/link";
-import React from "react";
-import { FaRegComment } from "react-icons/fa";
-import type { Thread } from "types";
+import type { Thread } from "features/threads";
 import { RelativeTime, NumberFormatCompact, Thumbnail } from "components";
+import { FaRegComment } from "react-icons/fa";
 import VoteButton from "./VoteButton";
 import ParticipantsList from "./ParticipantsList";
 import styles from "./Card.module.scss";

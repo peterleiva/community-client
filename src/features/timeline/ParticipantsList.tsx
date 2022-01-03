@@ -96,7 +96,7 @@ export default function ThreadParticipantsCard({
           <span
             onClick={() => dispatch({ type: "EXPAND" })}
             role="button"
-            tabIndex="0"
+            tabIndex={0}
           >
             <Thumbnail size={ThumbnailSize.TINY} framed>
               <PlusIcon /> {state.collapsed.length}
