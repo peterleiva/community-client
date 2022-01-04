@@ -1,14 +1,14 @@
 import type { Cursor, PageInfo } from "types";
 import type Operations from "./operations.enum";
 
-export type PageState<T> = {
+export type State<T> = {
   data: T[];
   caughUp: boolean;
   cursor?: Cursor;
   hasNextPage: boolean;
 };
 
-export type PageAction<T> =
+export type Action<T> =
   | {
       type: Operations.NEXT_BATCH;
       data: T[];

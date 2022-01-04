@@ -1,11 +1,11 @@
 import initializer from "./initializer";
 import Operations from "./operations.enum";
-import type { PageAction, PageState } from "./types";
+import type { Action, State } from "./types";
 
 export default function reducer<T>(
-  state: PageState<T>,
-  action: PageAction<T>
-): PageState<T> {
+  state: State<T>,
+  action: Action<T>
+): State<T> {
   switch (action.type) {
     case Operations.NEXT_BATCH:
       const { pageInfo, data } = action;

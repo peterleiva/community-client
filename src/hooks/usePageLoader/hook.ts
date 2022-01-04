@@ -1,22 +1,17 @@
 import { Reducer, useReducer } from "react";
-import type { Cursor, PageInfo } from "types";
-import type { PageAction, PageState } from "./types";
+import type { PageInfo } from "types";
+import type { Action, State } from "./types";
 import reducer from "./reducer";
-import initializer from "./initializer";
+import initializer, { InitArgs } from "./initializer";
 import Operations from "./operations.enum";
 
-type Options<T> = {
-  startCursor?: Cursor;
-  data?: T[];
-};
-
 export default function usePageLoader<T>({
-  startCursor,
+  cursor: startCursor,
   data = [],
-}: Options<T> = {}) {
+}: InitArgs<T> = {}) {
   const [state, dispatch] = useReducer<
-    Reducer<PageState<T>, PageAction<T>>,
-    { data: T[]; cursor?: Cursor }
+    Reducer<State<T>, Action<T>>,
+    InitArgs<T>
   >(
     reducer,
     {
