@@ -3,13 +3,16 @@ import type { GetServerSideProps } from "next";
 import { Timeline } from "features/timeline";
 import { listThreads, ThreadConnection, useThreads } from "features/threads";
 import styles from "styles/Home.module.scss";
+import { CaughUp } from "components";
 
 type HomeProps = {
   threads: ThreadConnection;
 };
 
 export default function Home({ threads }: HomeProps) {
-  const { loading, caughUp, data, nextPage } = useThreads({ threads });
+  const { data, caughUp } = useThreads({
+    threads,
+  });
 
   return (
     <div className={styles.container}>
@@ -19,12 +22,13 @@ export default function Home({ threads }: HomeProps) {
       </Head>
 
       <main className={styles.main}>
-        <Timeline
-          threads={data}
-          loading={loading}
-          caughUp={caughUp}
-          onNextPage={nextPage}
-        />
+        <Timeline threads={data} />
+        {data.length >= 0 && caughUp && (
+          <CaughUp
+            className={styles["caugh-up"]}
+            lastActivity={data[data.length - 1].activity}
+          />
+        )}
       </main>
     </div>
   );

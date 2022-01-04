@@ -13,4 +13,9 @@
   @media screen and (min-width: common.breakpoints("saint-bernard")) {
     padding: 0 30vw;
   }
+
+  .caugh-up {
+    margin: var(--space-lg) auto;
+    width: 50%;
+  }
 }
