@@ -12,13 +12,14 @@ type Options = {
 
 export default function useThreads({ sample, threads }: Options = {}) {
   const { cursor, nextPage, ...pageLoader } = usePageLoader<Thread>({
-    startCursor: threads?.pageInfo?.endCursor,
+    cursor: threads?.pageInfo?.endCursor,
     data: threadsConnectionMapper(threads),
   });
 
   const { loading, data, error } = useQuery<GetThreadsQuery, PageVariables>(
     GET_THREADS,
     {
+      fetchPolicy: "no-cache",
       variables: {
         page: {
           after: cursor,
