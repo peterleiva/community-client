@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import type { Thread } from "./types";
 import { GET_THREADS, PageVariables, GetThreadsQuery } from "./graphql";
-import usePageLoader from "hooks/usePageLoader";
+import { usePageLoader } from "hooks";
 import { threadsConnectionMapper } from "./mapper";
 import { ThreadConnection } from ".";
 
