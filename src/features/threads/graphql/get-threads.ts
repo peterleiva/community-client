@@ -16,6 +16,8 @@ export type PageVariables = {
 export const GET_THREADS = gql`
   query GetThreads($page: ForwardPageInput) {
     threads(page: $page) {
+      total
+
       pageInfo {
         endCursor
         hasNextPage

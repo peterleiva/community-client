@@ -1,11 +1,13 @@
-import { Connection, Node, User } from "types";
+import { Connection, Node } from "types";
 import type { Thread } from "./types";
 import { DateTime } from "luxon";
 import { fromISODate, mapperDTO } from "lib/mapper";
 import { PostMapper, PostDTO } from "./post-mapper";
 import { UserMapper, UserDTO } from "lib/user-mapper";
 
-export type ThreadConnection = Connection<ThreadDTO>;
+export interface ThreadConnection extends Connection<ThreadDTO> {
+  total: number;
+}
 
 export interface ThreadDTO extends Node {
   title: string;

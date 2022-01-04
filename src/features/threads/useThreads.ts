@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-import type { Cursor } from "types";
 import type { Thread } from "./types";
 import { GET_THREADS, PageVariables, GetThreadsQuery } from "./graphql";
 import usePageLoader from "hooks/usePageLoader";
@@ -29,9 +28,12 @@ export default function useThreads({ sample, threads }: Options = {}) {
     }
   );
 
+  const total = data?.threads.total ?? -Infinity;
+
   return {
     ...pageLoader,
     loading,
+    total,
     error,
     nextPage: () =>
       nextPage(threadsConnectionMapper(data?.threads), data?.threads?.pageInfo),
