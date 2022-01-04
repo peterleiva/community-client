@@ -11,6 +11,7 @@ type PageState<T> = {
   data: T[];
   caughUp: boolean;
   cursor?: Cursor;
+  hasNextPage: boolean;
 };
 
 type PageAction<T> =
@@ -26,6 +27,21 @@ type PageAction<T> =
   | {
       type: Operations.PREVIOUS_BATCH;
     };
+
+function init<T>({
+  cursor,
+  data,
+}: {
+  cursor?: Cursor;
+  data: T[];
+}): PageState<T> {
+  return {
+    cursor,
+    data,
+    caughUp: false,
+    hasNextPage: true,
+  };
+}
 
 function pageLoader<T>(
   state: PageState<T>,
@@ -43,20 +59,18 @@ function pageLoader<T>(
         caughUp: !hasNextPage,
         data: state.data.concat(data),
         cursor,
+        hasNextPage,
       };
 
     case Operations.PREVIOUS_BATCH:
+      // TODO
       return state;
 
     case Operations.RESET:
-      return {
-        ...state,
-        data: [],
-        caughUp: false,
-      };
+      return init({ data: [], cursor: state.cursor });
 
     default:
-      return state;
+      return init({ data: state.data, cursor: state.cursor });
   }
 }
 
@@ -69,13 +83,16 @@ export default function usePageLoader<T>({
   startCursor,
   data = [],
 }: Options<T> = {}) {
-  const [state, dispatch] = useReducer<Reducer<PageState<T>, PageAction<T>>>(
+  const [state, dispatch] = useReducer<
+    Reducer<PageState<T>, PageAction<T>>,
+    { data: T[]; cursor?: Cursor }
+  >(
     pageLoader,
     {
       data,
-      caughUp: false,
       cursor: startCursor,
-    }
+    },
+    init
   );
 
   const nextPage = (data: T[], pageInfo?: PageInfo) =>
