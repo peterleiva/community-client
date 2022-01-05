@@ -1,6 +1,6 @@
 import { Reducer, useReducer } from "react";
 import { User } from "types";
-import { Thumbnail, ThumbnailSize } from "components";
+import { Thumbnail } from "components";
 import { partition } from "utils";
 import {
   AiOutlinePlus as PlusIcon,
@@ -79,14 +79,7 @@ export default function ThreadParticipantsCard({
   return (
     <div className={styles.stack}>
       {state.activated.map(user => {
-        return (
-          <Thumbnail
-            key={user.id}
-            user={user}
-            size={ThumbnailSize.TINY}
-            framed
-          />
-        );
+        return <Thumbnail key={user.id} user={user} size="tiny" framed />;
       })}
 
       {state.expanded ? (
@@ -98,7 +91,7 @@ export default function ThreadParticipantsCard({
             role="button"
             tabIndex={0}
           >
-            <Thumbnail size={ThumbnailSize.TINY} framed>
+            <Thumbnail size="tiny" framed>
               <PlusIcon /> {state.collapsed.length}
             </Thumbnail>
           </span>

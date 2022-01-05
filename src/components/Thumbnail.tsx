@@ -1,24 +1,14 @@
 import Image, { ImageProps } from "next/image";
 import React from "react";
 import { User } from "types";
-import { applyClasses } from "lib";
+import { applyClasses, Size, getSize } from "lib";
 import styles from "./Thumbnail.module.scss";
-
-export enum ThumbnailSize {
-  TINY = 36,
-  VERY_SMALL = 48,
-  SMALL = 64,
-  MEDIUM = 96,
-  LARGE = 128,
-  XL = 144,
-  XXL = 160,
-}
 
 interface ThumbnailProps
   extends Omit<ImageProps, "src" | "width" | "height" | "className"> {
   user?: User;
   framed?: boolean;
-  size?: ThumbnailSize;
+  size?: Size;
   children?: React.ReactNode;
   className?: string;
 }
@@ -27,7 +17,7 @@ export default function Thumbnail({
   children,
   user,
   framed = false,
-  size = ThumbnailSize.VERY_SMALL,
+  size,
   className = "",
   ...all
 }: ThumbnailProps): JSX.Element {
@@ -36,6 +26,8 @@ export default function Thumbnail({
   if (framed) {
     css = applyClasses(css, styles.framed);
   }
+
+  size = getSize(size);
 
   if (children) {
     return (
