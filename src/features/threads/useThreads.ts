@@ -1,11 +1,9 @@
 import { useQuery } from "@apollo/client";
-import type { Thread } from "./types";
 import { GET_THREADS, PageVariables, GetThreadsQuery } from "./graphql";
 import { usePageLoader } from "hooks";
 import { threadsConnectionMapper } from "./mapper";
 import { ThreadConnection } from ".";
-import { useCallback, useEffect, useState } from "react";
-import { Cursor, PageInfo } from "types";
+import { useEffect } from "react";
 
 type Options = {
   sample?: number;
@@ -16,30 +14,26 @@ export default function useThreads({
   sample,
   threads: initialThreads,
 }: Options = {}) {
-  const [hasNextPage, setHasNextPage] = useState(true);
-  const [threads, setThreads] = useState<Thread[]>(
-    threadsConnectionMapper(initialThreads)
-  );
+  const {
+    hasNextPage,
+    next,
+    data: threads,
+    cursor,
+    setBatches,
+  } = usePageLoader({ data: initialThreads, map: threadsConnectionMapper });
 
-  const [page, setPage] = useState<PageInfo | undefined>(
-    initialThreads?.pageInfo
-  );
-
-  const [batches, setBatches] = useState<ThreadConnection[]>([]);
   const { loading, data, error } = useQuery<GetThreadsQuery, PageVariables>(
     GET_THREADS,
     {
       fetchPolicy: "no-cache",
       variables: {
         page: {
-          after: page?.endCursor,
+          after: cursor,
           first: sample,
         },
       },
     }
   );
-
-  const total = data?.threads.total ?? -Infinity;
 
   useEffect(() => {
     const threads = data?.threads ?? [];
@@ -47,25 +41,8 @@ export default function useThreads({
     setBatches(prev => prev.concat(threads));
   }, [data, setBatches]);
 
-  const next = useCallback(() => {
-    const nextBatch = batches.shift();
-
-    if (nextBatch && hasNextPage) {
-      const threads = threadsConnectionMapper(nextBatch);
-
-      setThreads(prev => prev.concat(threads));
-      setPage(nextBatch.pageInfo);
-      setHasNextPage(nextBatch.pageInfo.hasNextPage);
-      setBatches(prev => {
-        prev.shift();
-        return prev;
-      });
-    }
-  }, [batches, setThreads, setPage, setHasNextPage, hasNextPage]);
-
   return {
     loading,
-    total,
     data: threads,
     caughUp: !hasNextPage,
     hasNextPage,

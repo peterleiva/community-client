@@ -1,11 +1,12 @@
-import type { Cursor, PageInfo } from "types";
+import type { Connection, Cursor, PageInfo } from "types";
 import type Operations from "./operations.enum";
 
-export type State<T> = {
+export type State<T, U extends Connection<any>> = {
   data: T[];
-  caughUp: boolean;
-  cursor?: Cursor;
+  batches: T[];
+  pageInfo?: PageInfo;
   hasNextPage: boolean;
+  map: (data: U) => T[];
 };
 
 export type Action<T> =
