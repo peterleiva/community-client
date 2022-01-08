@@ -1,6 +1,6 @@
+import type { Action, State } from "./types";
 import initializer from "./initializer";
 import Operations from "./operations.enum";
-import type { Action, State } from "./types";
 
 export default function reducer<T>(
   state: State<T>,
@@ -10,15 +10,11 @@ export default function reducer<T>(
     case Operations.NEXT_BATCH:
       const { pageInfo, data } = action;
 
-      const cursor = pageInfo?.endCursor;
-      const hasNextPage = pageInfo?.hasNextPage ?? true;
-
       return {
         ...state,
-        caughUp: !hasNextPage,
         data: state.data.concat(data),
-        cursor,
-        hasNextPage,
+        endCursor: pageInfo.endCursor,
+        hasNextPage: pageInfo.hasNextPage,
       };
 
     case Operations.PREVIOUS_BATCH:
@@ -26,9 +22,9 @@ export default function reducer<T>(
       return state;
 
     case Operations.RESET:
-      return initializer({ data: [], cursor: state.cursor });
+      return initializer({ data: [], endCursor: state.initialCursor });
 
     default:
-      return initializer({ data: state.data, cursor: state.cursor });
+      return initializer({ data: [], endCursor: state.initialCursor });
   }
 }

@@ -11,7 +11,7 @@ type Options = {
 };
 
 export default function useThreads({
-  sample,
+  sample = 40,
   threads: initialThreads,
 }: Options = {}) {
   const {
@@ -19,8 +19,11 @@ export default function useThreads({
     next,
     data: threads,
     cursor,
-    setBatches,
-  } = usePageLoader({ data: initialThreads, map: threadsConnectionMapper });
+    attachBatch,
+  } = usePageLoader({
+    endCursor: initialThreads?.pageInfo.endCursor,
+    data: threadsConnectionMapper(initialThreads),
+  });
 
   const { loading, data, error } = useQuery<GetThreadsQuery, PageVariables>(
     GET_THREADS,
@@ -36,10 +39,16 @@ export default function useThreads({
   );
 
   useEffect(() => {
-    const threads = data?.threads ?? [];
+    if (!loading && !error && data?.threads) {
+      const { threads } = data;
+      const { pageInfo } = threads;
 
-    setBatches(prev => prev.concat(threads));
-  }, [data, setBatches]);
+      attachBatch({
+        data: threadsConnectionMapper(threads),
+        pageInfo,
+      });
+    }
+  }, [data, attachBatch, loading, error]);
 
   return {
     loading,

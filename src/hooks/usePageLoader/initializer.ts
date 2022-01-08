@@ -1,20 +1,20 @@
 import type { Connection, Cursor } from "types";
 import type { State } from "./types";
 
-export type InitArgs<T, U extends Connection<any>> = {
-  map: (data: U) => T[];
-  data?: U;
+export type InitArgs<T> = {
+  data?: T[];
+  endCursor?: Cursor;
 };
 
-export default function initializer<T, U extends Connection<any>>({
-  data: initial,
-  map,
-}: InitArgs<T, U>): State<T, U> {
+export default function initializer<T>({
+  data,
+  endCursor,
+}: InitArgs<T>): State<T> {
   return {
-    pageInfo: initial?.pageInfo,
-    data: initial ? map(initial) : [],
+    data: data ?? [],
     hasNextPage: true,
     batches: [],
-    map,
+    initialCursor: endCursor,
+    endCursor,
   };
 }

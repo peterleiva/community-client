@@ -1,42 +1,29 @@
 import { Reducer, useCallback, useReducer, useState } from "react";
-import type { Connection, Cursor, PageInfo } from "types";
-// import type { Action, State } from "./types";
-// import reducer from "./reducer";
+import type { Action, Batch, State } from "./types";
+import reducer from "./reducer";
 import initializer, { InitArgs } from "./initializer";
-// import Operations from "./operations.enum";
+import Operations from "./operations.enum";
 
-export default function usePageLoader<T, U extends Connection<any>>({
-  data,
-  map,
-}: InitArgs<T, U>) {
-  const [loaded, setLoaded] = useState<T[]>(data ? map(data) : []);
-  const [pageInfo, setPageInfo] = useState<PageInfo | undefined>(
-    data?.pageInfo
-  );
-  const [batches, setBatches] = useState<U[]>([]);
-  const [hasNextPage, setHasNextPage] = useState(true);
+export default function usePageLoader<T>(args: InitArgs<T>) {
+  const [batch, setBatch] = useState<Batch<T> | null>(null);
+
+  const [{ endCursor: cursor, data, hasNextPage }, dispatch] = useReducer<
+    Reducer<State<T>, Action<T>>,
+    InitArgs<T>
+  >(reducer, args, initializer);
 
   const next = useCallback(() => {
-    const nextBatch = batches.shift();
-
-    if (nextBatch && hasNextPage) {
-      const data = map(nextBatch) ?? nextBatch;
-
-      setLoaded(prev => prev.concat(data));
-      setPageInfo(nextBatch.pageInfo);
-      setHasNextPage(nextBatch.pageInfo.hasNextPage);
-      setBatches(prev => {
-        prev.shift();
-        return prev;
-      });
+    if (batch && hasNextPage) {
+      dispatch({ type: Operations.NEXT_BATCH, ...batch });
+      setBatch(null);
     }
-  }, [batches, setLoaded, setPageInfo, setHasNextPage, hasNextPage, map]);
+  }, [batch, dispatch, hasNextPage]);
 
   return {
-    cursor: pageInfo?.endCursor,
-    setBatches,
-    data: loaded,
-    next,
+    cursor,
+    data,
     hasNextPage,
+    attachBatch: setBatch,
+    next,
   };
 }
