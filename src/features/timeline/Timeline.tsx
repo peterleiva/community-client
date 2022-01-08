@@ -9,24 +9,25 @@ import { CaughUp } from "components";
 type TimelineProps = {
   threads?: Thread[];
   onReachEnd?: () => void;
-  caughUp: boolean;
+  caughUp?: boolean;
   loading?: boolean;
 };
 
 export default function Timeline({
   threads = [],
   onReachEnd,
-  caughUp,
+  caughUp = false,
   loading = false,
 }: TimelineProps): JSX.Element {
   const { ref, inView } = useInView({ rootMargin: "1000%" });
-  const targetId = threads[threads.length - 1].id;
 
   useEffect(() => {
     if (inView && !caughUp) {
       onReachEnd?.();
     }
   }, [inView, caughUp, onReachEnd]);
+
+  const targetId = threads[threads.length - 1]?.id;
 
   if (threads.length == 0) {
     return <EmptyState />;
