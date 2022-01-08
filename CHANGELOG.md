@@ -7,6 +7,14 @@ Each log entry can be in the following kind: **Added**[^1], **Changed**[^2], **D
 
 ## [Unreleased]
 
+### Added
+
+- Timelines now have Infinite Page Loader as the page scroll down
+
+### Fixed
+
+- minor styles improovements
+
 ## [0.3.0] - 2021-01-03
 
 ### Added
