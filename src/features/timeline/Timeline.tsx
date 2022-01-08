@@ -45,7 +45,7 @@ export default function Timeline({
 
       {loading && <p className="text-center">loading...</p>}
 
-      {caughUp && (
+      {!loading && caughUp && (
         <CaughUp
           className={styles["caugh-up"]}
           lastActivity={threads[threads.length - 1].activity}
