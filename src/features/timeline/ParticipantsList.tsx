@@ -68,7 +68,7 @@ function expander(state: State, action: Action): State {
 
 export default function ThreadParticipantsCard({
   participants,
-  size = 2,
+  size = 3,
 }: ParticipantsProps) {
   const [state, dispatch] = useReducer<Reducer<State, Action>, InitArgs>(
     expander,
