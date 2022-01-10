@@ -1,5 +1,5 @@
 import type { Node, User } from "types";
-import { mapperDTO, fromISODate } from "./mapper";
+import { fromISODate } from "./mapper";
 
 export interface UserDTO extends Node {
   avatar: string;
@@ -10,15 +10,13 @@ export interface UserDTO extends Node {
   };
 }
 
-export class UserMapper implements mapperDTO<UserDTO, User> {
-  toObject(data: UserDTO): User {
-    const { name, createdAt, updatedAt, ...user } = data;
+export function userMap(data: UserDTO): User {
+  const { name, createdAt, updatedAt, ...user } = data;
 
-    return {
-      ...user,
-      username: name?.nick,
-      createdAt: fromISODate(data.createdAt),
-      updatedAt: fromISODate(data.updatedAt),
-    };
-  }
+  return {
+    ...user,
+    username: name?.nick,
+    createdAt: fromISODate(data.createdAt),
+    updatedAt: fromISODate(data.updatedAt),
+  };
 }

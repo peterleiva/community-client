@@ -1,9 +1,9 @@
 import { Connection, Node } from "types";
 import type { Thread } from "./types";
 import { DateTime } from "luxon";
-import { fromISODate, mapperDTO } from "lib/mapper";
-import { PostMapper, PostDTO } from "./post-mapper";
-import { UserMapper, UserDTO } from "lib/user-mapper";
+import { fromISODate } from "lib/mapper";
+import postMap, { PostDTO } from "./post-mapper";
+import { userMap, UserDTO } from "lib/user-mapper";
 
 export interface ThreadConnection extends Connection<ThreadDTO> {
   total: number;
@@ -21,25 +21,20 @@ interface ParticipantsConnection extends Connection<UserDTO> {
   interactions: number;
 }
 
-export class ThreadMapper implements mapperDTO<ThreadDTO, Thread> {
-  toObject(data: ThreadDTO): Thread {
-    const userMapper = new UserMapper();
-    const postMapper = new PostMapper();
+export default function threadMap(data: ThreadDTO): Thread {
+  const { createdAt, updatedAt, lastActivity, ...thread } = data;
 
-    const { createdAt, updatedAt, lastActivity, ...thread } = data;
+  const post = postMap(data.post);
+  const participants = data.participants.edges.map(({ node: user }) =>
+    userMap(user)
+  );
 
-    const post = postMapper.toObject(data.post);
-    const participants = data.participants.edges.map(({ node: user }) =>
-      userMapper.toObject(user)
-    );
-
-    return {
-      ...thread,
-      post,
-      participants,
-      activity: DateTime.fromISO(lastActivity),
-      createdAt: fromISODate(createdAt),
-      updatedAt: fromISODate(updatedAt),
-    };
-  }
+  return {
+    ...thread,
+    post,
+    participants,
+    activity: DateTime.fromISO(lastActivity),
+    createdAt: fromISODate(createdAt),
+    updatedAt: fromISODate(updatedAt),
+  };
 }
