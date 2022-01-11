@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Thread } from "features/threads";
+import { applyClasses } from "lib";
 import { RelativeTime, NumberFormatCompact, Thumbnail } from "components";
 import { FaRegComment } from "react-icons/fa";
 import VoteButton from "./VoteButton";
@@ -27,7 +28,14 @@ export default function ThreadCard({
           <div className={styles.author}>
             <Thumbnail user={post.author} size="tiny" />
             Posted by
-            <b className={styles.username}> {post.author.username}</b>
+            <Link href={`/user/${post.author.username}`} passHref>
+              <a
+                href="pass"
+                className={applyClasses(styles.username, "text-bold")}
+              >
+                {post.author.username}
+              </a>
+            </Link>
           </div>
         </header>
 

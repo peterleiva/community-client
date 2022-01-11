@@ -12,6 +12,7 @@ describe("Timeline Card", () => {
     expect(container).toHaveTextContent(thread.title);
     expect(container).toHaveTextContent(description);
     expect(container).toHaveTextContent(thread.title);
+    expect(container).toHaveTextContent("" + thread.replies);
     expect(container).toHaveTextContent(post.author.username);
   });
 });

@@ -22,6 +22,12 @@ describe("Timeline", () => {
     expect(container).toHaveTextContent(/loading/i);
   });
 
+  test("Render Caugh Up when timeline reaches limits", () => {
+    const { container } = render(<Timeline threads={threads} limit={1} />);
+
+    expect(container).toHaveTextContent(/caugh up/i);
+  });
+
   test("attach threads when reaches the end of timeline", async () => {
     const thread = ThreadFactory.build();
 
