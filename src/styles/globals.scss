@@ -3,3 +3,7 @@
 :root {
   --color-link: var(--color-accent);
 }
+
+a {
+  color: var(--color-link);
+}

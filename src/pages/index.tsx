@@ -1,5 +1,7 @@
-import Head from "next/head";
 import type { GetServerSideProps } from "next";
+import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { Timeline } from "features/timeline";
 import { listThreads, ThreadConnection, useThreads } from "features/threads";
 import styles from "styles/Home.module.scss";
@@ -9,7 +11,8 @@ type HomeProps = {
 };
 
 export default function Home({ threads }: HomeProps) {
-  const { data, caughUp, loading, next } = useThreads({
+  const { pathname } = useRouter();
+  const { data, caughUp, loading, next, error } = useThreads({
     threads,
   });
 
@@ -27,6 +30,24 @@ export default function Home({ threads }: HomeProps) {
           caughUp={caughUp}
           loading={loading}
         />
+
+        {error && (
+          <div className="text-center">
+            <p className="text-danger text-bold">
+              Error Trying load more threads
+            </p>
+            <p>
+              Please{" "}
+              <Link href={pathname} passHref>
+                <a href="pass">refresh</a>
+              </Link>{" "}
+              the page. If the problem persist,
+              <Link href="/support" passHref>
+                <a href="/support"> contact the support team</a>
+              </Link>
+            </p>
+          </div>
+        )}
       </main>
     </div>
   );
