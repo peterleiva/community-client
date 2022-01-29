@@ -16,7 +16,8 @@
     "format:check": "npm run prettier -- --check",
     "prettier": "prettier --ignore-path .gitignore \".\"",
     "test": "jest",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@apollo/client": "^3.5.6",
@@ -47,8 +48,10 @@
     "eslint-plugin-jest": "^26.0.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "fishery": "^2.1.0",
+    "husky": "^7.0.4",
     "jest": "^27.4.5",
     "jest-watch-typeahead": "^1.0.0",
+    "lint-staged": "^12.3.2",
     "prettier": "^2.3.2",
     "react-test-renderer": "^17.0.2",
     "stylelint": "^14.1.0",
@@ -56,5 +59,10 @@
     "stylelint-config-sass-guidelines": "^9.0.1",
     "stylelint-config-standard-scss": "^3.0.0",
     "typescript": "^4.5.5"
+  },
+  "lint-staged": {
+    "*.css": "stylelint --fix",
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "*.--write": "prettier --write --ignore-unknown"
   }
 }
