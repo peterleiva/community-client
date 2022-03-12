@@ -1,6 +1,5 @@
 import type { IconType } from "react-icons";
-import { applyClasses } from "lib";
-import styles from "./Button.module.scss";
+import clsx from "clsx";
 
 interface ButtonProps {
   Icon?: IconType;
@@ -20,11 +19,13 @@ export default function Button({
   renderContainer,
   className,
 }: ButtonProps): JSX.Element {
-  const css = applyClasses(className, styles.button);
   return renderContainer({
-    className: css,
+    className: clsx(
+      className,
+      "rounded-lg cursor-pointer flex flex-row flex-nowrap items-center justify-evenly border gap-4 py-4 px-6 border border-solid border-gray-400"
+    ),
     children: (
-      <span className={css}>
+      <span>
         {Icon && <Icon />}
         {children}
       </span>

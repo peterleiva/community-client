@@ -22,7 +22,7 @@ export default function Timeline({
   limit = 1_000,
 }: TimelineProps): JSX.Element {
   const { ref, inView } = useInView({ rootMargin: "1000%" });
-  caughUp ||= threads.length >= limit;
+  caughUp = caughUp || threads.length >= limit;
 
   useEffect(() => {
     if (inView && !caughUp) {
