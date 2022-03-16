@@ -1,0 +1,19 @@
+overwrite: true
+schema:
+  - apollo-engine:
+      engine:
+        apiKey: ${APOLLO_API_KEY}
+      graph: Community-em-desenvolvimento
+      variant: development
+
+documents: "src/**/*.graphql"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+      - "fragment-matcher"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"

@@ -19,10 +19,12 @@
     "test:watch": "npm test -- --watch",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "codegen": "graphql-codegen -r dotenv/config --config codegen.yml dotenv_config_path=.env.local"
   },
   "dependencies": {
     "@apollo/client": "^3.5.8",
+    "@graphql-codegen/cli": "^2.6.2",
     "clsx": "^1.1.1",
     "estileira": "^0.5.0",
     "graphql": "^15.8.0",
@@ -75,7 +77,13 @@
     "stylelint-config-sass-guidelines": "^9.0.1",
     "stylelint-config-standard-scss": "^3.0.0",
     "tailwindcss": "^3.0.23",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "@graphql-codegen/typescript": "2.4.7",
+    "@graphql-codegen/fragment-matcher": "3.2.1",
+    "@graphql-codegen/typescript-react-apollo": "3.2.10",
+    "@graphql-codegen/typescript-operations": "2.3.4",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/cli": "2.6.2"
   },
   "lint-staged": {
     "*.css": "stylelint --fix",
