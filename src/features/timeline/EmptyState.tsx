@@ -11,16 +11,11 @@ export default function TimelineEmptyState() {
       tagline="Make history. Lead the way"
       description="Starting a conversation you can share you thoughts and rise a topic for anyone in the community. "
     >
-      <Button
-        renderContainer={props => (
-          <Link href="/threads/new" passHref>
-            <a href="passHref" {...props}>
-              <PlusIcon />
-              Start Conversation
-            </a>
-          </Link>
-        )}
-      />
+      <Link href="/threads/new" passHref>
+        <Button href="dummy" startIcon={<PlusIcon />} variant="outlined">
+          Start Conversation
+        </Button>
+      </Link>
     </EmptyState>
   );
 }
