@@ -20,4 +20,13 @@ module.exports = {
     },
   ],
   framework: "@storybook/react",
+
+  async webpackFinal(config) {
+    config.resolve.modules = [
+      ...(config.resolve.modules ?? []),
+      path.resolve(__dirname, "../src"),
+    ];
+
+    return config;
+  },
 };
