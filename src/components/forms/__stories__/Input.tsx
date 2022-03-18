@@ -18,8 +18,7 @@ Text.args = {
 
 export const HelperText = Template.bind({});
 HelperText.args = {
-  type: "text",
-  placeholder: "text",
+  ...Text.args,
   helperText: "example with helper text",
 };
 
@@ -96,7 +95,7 @@ Month.args = {
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  type: "text",
+  ...Text.args,
   placeholder: "Disabled",
   disabled: true,
 };
