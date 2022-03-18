@@ -20,7 +20,8 @@
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "codegen": "graphql-codegen -r dotenv/config --config codegen.yml dotenv_config_path=.env.local"
+    "codegen": "graphql-codegen -r dotenv/config --config codegen.yml dotenv_config_path=.env.local",
+    "chromatic": "npx chromatic --project-token=1ca6cbfec356"
   },
   "dependencies": {
     "@apollo/client": "^3.5.8",
@@ -40,6 +41,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/fragment-matcher": "3.2.1",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/typescript": "2.4.7",
+    "@graphql-codegen/typescript-operations": "2.3.4",
+    "@graphql-codegen/typescript-react-apollo": "3.2.10",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-interactions": "^6.4.19",
@@ -57,6 +64,7 @@
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.3",
     "casual": "^1.6.2",
+    "chromatic": "^6.5.3",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.2",
     "eslint-config-prettier": "^8.3.0",
@@ -77,13 +85,7 @@
     "stylelint-config-sass-guidelines": "^9.0.1",
     "stylelint-config-standard-scss": "^3.0.0",
     "tailwindcss": "^3.0.23",
-    "typescript": "^4.5.5",
-    "@graphql-codegen/typescript": "2.4.7",
-    "@graphql-codegen/fragment-matcher": "3.2.1",
-    "@graphql-codegen/typescript-react-apollo": "3.2.10",
-    "@graphql-codegen/typescript-operations": "2.3.4",
-    "@graphql-codegen/introspection": "2.1.1",
-    "@graphql-codegen/cli": "2.6.2"
+    "typescript": "^4.5.5"
   },
   "lint-staged": {
     "*.css": "stylelint --fix",
