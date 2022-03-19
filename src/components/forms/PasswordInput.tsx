@@ -35,8 +35,8 @@ export default function PasswordInput({
   return (
     <TextInput
       type={hidden ? "password" : "text"}
-      {...props}
       {...decorationProps}
+      {...props}
     />
   );
 }

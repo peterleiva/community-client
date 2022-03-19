@@ -25,12 +25,12 @@ type InputProps = JSX.IntrinsicElements["input"] & {
 
 export default function TextInput({
   type = "text",
+  disabled,
   helperText,
   error,
   startDecoration = null,
   endDecoration = null,
   className,
-  disabled,
   ...props
 }: InputProps) {
   const { focused, ref } = useFocus<HTMLInputElement>();
@@ -46,9 +46,9 @@ export default function TextInput({
     <div className={clsx(className, "inline-flex flex-col")}>
       <div
         className={clsx(
-          { "bg-zinc-300 text-zinc-600": disabled },
-          { "hover:border-slate-400 border-slate-400": focused },
-          "flex flex-row flex-nowrap gap-2 items-center relative rounded-md border border-slate-300 bg-gray-50 p-2"
+          "flex flex-row flex-nowrap gap-2 items-center relative rounded-md border border-slate-300 bg-gray-50 p-2",
+          { "bg-gray-300 text-zinc-300": disabled },
+          { "hover:border-slate-400 border-slate-400": focused }
         )}
       >
         <StartAdornment />
