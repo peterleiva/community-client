@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Input from "../Input";
+import LengthAdornment from "../LengthAdornment";
 
 type InputComponent = typeof Input;
 
@@ -98,4 +99,11 @@ Disabled.args = {
   ...Text.args,
   placeholder: "Disabled",
   disabled: true,
+};
+
+export const InputLength = Template.bind({});
+InputLength.args = {
+  ...Text.args,
+  maxLength: 154,
+  endDecoration: <LengthAdornment maxLength={150} />,
 };
