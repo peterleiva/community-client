@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
-import Input from "../Input";
+import TextInput from "../TextInput";
 
-describe("Input", () => {
+describe("TextInput", () => {
   test("show helper text", () => {
     const helper = "helper text";
-    const { container } = render(<Input helperText={helper} />);
+    const { container } = render(<TextInput helperText={helper} />);
     expect(container).toHaveTextContent(helper);
   });
 });

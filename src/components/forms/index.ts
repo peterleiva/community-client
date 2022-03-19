@@ -1,3 +1,3 @@
-export { default as Input } from "./Input";
-export { default as Password } from "./Password";
+export { default as TextInput } from "./TextInput";
+export { default as PasswordInput } from "./PasswordInput";
 export { default as LengthAdornment } from "./LengthAdornment";

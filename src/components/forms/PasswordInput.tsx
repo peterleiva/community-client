@@ -1,13 +1,13 @@
 import { useToggle } from "lib";
-import Input from "./Input";
+import TextInput from "./TextInput";
 import {
   RiEyeLine as ShowIcon,
   RiEyeOffLine as HideIcon,
 } from "react-icons/ri";
 import { IconButton } from "components/Button";
 
-type PasswordProps = Omit<
-  React.ComponentProps<typeof Input>,
+type PasswordInputProps = Omit<
+  React.ComponentProps<typeof TextInput>,
   "startDecoration" | "endDecoration"
 > & {
   position?: "right" | "left";
@@ -15,12 +15,12 @@ type PasswordProps = Omit<
   hideAdornment?: boolean;
 };
 
-export default function Password({
+export default function PasswordInput({
   show = false,
   position = "right",
   hideAdornment,
   ...props
-}: PasswordProps) {
+}: PasswordInputProps) {
   const { hidden, toggle } = useToggle(show);
 
   const adornment = (
@@ -33,7 +33,7 @@ export default function Password({
   };
 
   return (
-    <Input
+    <TextInput
       type={hidden ? "password" : "text"}
       {...props}
       {...decorationProps}

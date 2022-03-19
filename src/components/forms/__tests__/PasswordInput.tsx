@@ -1,13 +1,13 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Password from "../Password";
+import PasswordInput from "../PasswordInput";
 
-describe("Password", () => {
+describe("PasswordInput", () => {
   const label = "password label";
 
   test("renders password input", () => {
     const { getByPlaceholderText } = render(
-      <Password id="input" placeholder="password" />
+      <PasswordInput id="input" placeholder="password" />
     );
 
     const input = getByPlaceholderText("password");
@@ -18,7 +18,7 @@ describe("Password", () => {
 
   test("render visible password", () => {
     const { getByPlaceholderText } = render(
-      <Password value={label} placeholder="password" show />
+      <PasswordInput value={label} placeholder="password" show />
     );
 
     const input = getByPlaceholderText("password");
@@ -29,7 +29,7 @@ describe("Password", () => {
 
   test("toggle password visibility", () => {
     const { getByPlaceholderText, getByRole } = render(
-      <Password placeholder="password" />
+      <PasswordInput placeholder="password" />
     );
 
     const input = getByPlaceholderText("password");
@@ -43,7 +43,7 @@ describe("Password", () => {
 
   test("pair-numbered toggle visibility keeps hidden", () => {
     const { getByPlaceholderText, getByRole } = render(
-      <Password placeholder="password" />
+      <PasswordInput placeholder="password" />
     );
 
     const input = getByPlaceholderText("password");

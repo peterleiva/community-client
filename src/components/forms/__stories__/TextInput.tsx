@@ -1,15 +1,17 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Input from "../Input";
+import TextInput from "../TextInput";
 import LengthAdornment from "../LengthAdornment";
 
-type InputComponent = typeof Input;
+type InputComponent = typeof TextInput;
 
 export default {
   title: "components/forms/Input",
-  component: Input,
+  component: TextInput,
 } as ComponentMeta<InputComponent>;
 
-const Template: ComponentStory<InputComponent> = args => <Input {...args} />;
+const Template: ComponentStory<InputComponent> = args => (
+  <TextInput {...args} />
+);
 
 export const Text = Template.bind({});
 Text.args = {
@@ -70,23 +72,17 @@ Number.args = {
   placeholder: "number",
 };
 
-export const Password = Template.bind({});
-Password.args = {
-  type: "password",
-  placeholder: "password",
-};
-
 export const Search = Template.bind({});
 Search.args = {
   type: "search",
   placeholder: "search",
 };
 
-export const File = Template.bind({});
-File.args = {
-  type: "file",
-  placeholder: "file",
-};
+// export const File = Template.bind({});
+// File.args = {
+//   type: "file",
+//   placeholder: "file",
+// };
 
 export const Month = Template.bind({});
 Month.args = {

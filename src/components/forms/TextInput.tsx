@@ -23,7 +23,8 @@ type InputProps = JSX.IntrinsicElements["input"] & {
   endDecoration?: Maybe<JSX.Element>;
 };
 
-export default function Input({
+export default function TextInput({
+  type = "text",
   helperText,
   error,
   startDecoration = null,
@@ -52,6 +53,7 @@ export default function Input({
       >
         <StartAdornment />
         <input
+          type={type}
           ref={ref}
           className={clsx(
             "bg-transparent placeholder-slate-400 outline-none bg-none grow"
