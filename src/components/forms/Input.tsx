@@ -1,6 +1,8 @@
+import { useCallback } from "react";
+import type { Maybe } from "types";
 import { FiAlertCircle as ErrorIcon } from "react-icons/fi";
 import clsx from "clsx";
-import type { Maybe } from "generated/graphql";
+import useFocus from "./useFocus";
 
 type InputProps = JSX.IntrinsicElements["input"] & {
   /**
@@ -24,30 +26,48 @@ type InputProps = JSX.IntrinsicElements["input"] & {
 export default function Input({
   helperText,
   error,
-  startDecoration,
-  endDecoration,
+  startDecoration = null,
+  endDecoration = null,
   className,
+  disabled,
   ...props
 }: InputProps) {
+  const { focused, ref } = useFocus<HTMLInputElement>();
+
+  const StartAdornment = useCallback(
+    () => (error ? <ErrorIcon /> : startDecoration),
+    [error, startDecoration]
+  );
+
+  const EndAdornment = useCallback(() => endDecoration, [endDecoration]);
+
   return (
-    <div className={clsx(className)}>
-      <div className="flex flex-row items-center">
-        <div className="absolute left-7 flex">
-          {error ? <ErrorIcon /> : startDecoration}
-        </div>
+    <div className={clsx(className, "inline-flex flex-col")}>
+      <div
+        className={clsx(
+          { "bg-zinc-300 text-zinc-600": disabled },
+          { "hover:border-slate-400 border-slate-400": focused },
+          "flex flex-row flex-nowrap gap-2 items-center relative rounded-md border border-slate-300 bg-gray-50 p-2"
+        )}
+      >
+        <StartAdornment />
         <input
+          ref={ref}
           className={clsx(
-            "disabled:bg-gray-300 focus:border-neutral-600 placeholder-slate-400 outline-none rounded-md border border-slate-300 bg-gray-50 px-6 py-2 input-color:p-0",
-            { "pl-9": error || startDecoration },
-            { "pr-9": endDecoration }
+            "bg-transparent placeholder-slate-400 outline-none bg-none grow"
           )}
+          disabled={disabled}
           {...props}
         />
-        <div className="relative right-7 flex items-center">
-          {endDecoration}
-        </div>
+        <EndAdornment />
       </div>
-      <small className="m-4 text-xs text-slate-500">{helperText}</small>
+      <HelperText text={helperText} />
     </div>
   );
 }
+
+const HelperText = ({ text }: { text?: string }) => {
+  if (!text) return null;
+
+  return <small className="m-4 text-xs text-slate-500">{text}</small>;
+};

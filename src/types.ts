@@ -40,3 +40,5 @@ export interface User extends Timestamps {
   avatar?: Image;
   username: string;
 }
+
+export type Maybe<T> = T | null;

@@ -61,7 +61,7 @@ Date.args = {
 export const Email = Template.bind({});
 Email.args = {
   type: "email",
-  placeholder: "number",
+  placeholder: "email",
 };
 
 export const Number = Template.bind({});
