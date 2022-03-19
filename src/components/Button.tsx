@@ -1,6 +1,7 @@
+import { useCallback } from "react";
 import type { IconType } from "react-icons";
 import clsx from "clsx";
-import React, { useCallback } from "react";
+import { type HTMLMotionProps, motion } from "framer-motion";
 
 type ButtonProps = JSX.IntrinsicElements["button"] &
   JSX.IntrinsicElements["a"] & {
@@ -20,11 +21,14 @@ type ButtonProps = JSX.IntrinsicElements["button"] &
      * scale button using one of predefined sizes
      */
     size?: keyof typeof sizing;
-    disabled?: boolean;
     /**
      * indicates whether is rendered as a block, meaning take full width
      */
     block?: boolean;
+    /**
+     * disables button
+     */
+    disabled?: boolean;
   };
 
 const isAnchor = (
@@ -45,14 +49,17 @@ export default function Button({
   disabled,
   ...props
 }: ButtonProps): JSX.Element {
-  className = clsx(
-    className,
-    "cursor-pointer rounded-lg transition duration-100 inline-block",
-    { "cursor-not-allowed": disabled },
-    { "w-full": block },
-    sizing[size ?? "base"],
-    variants(disabled)[variant]
-  );
+  const allProps = {
+    className: clsx(
+      className,
+      "cursor-pointer rounded-lg transition duration-100 inline-block",
+      { "cursor-not-allowed": disabled },
+      { "w-full": block },
+      sizing[size ?? "base"],
+      variants(disabled)[variant]
+    ),
+    ...props,
+  };
 
   const Content = useCallback(
     () => (
@@ -67,13 +74,14 @@ export default function Button({
 
   if (isAnchor(props)) {
     return (
-      <a className={className} {...props}>
+      <a {...allProps}>
         <Content />
       </a>
     );
   } else {
     return (
-      <button className={className} {...props} disabled>
+      <button {...allProps} disabled>
+        {" "}
         <Content />
       </button>
     );
@@ -101,3 +109,39 @@ const variants = (disabled = false) => ({
     },
   ],
 });
+
+type IconButtonProps = Pick<ButtonProps, "size" | "className" | "children"> &
+  HTMLMotionProps<"button">;
+
+export function IconButton({
+  size = "base",
+  children,
+  className,
+  ...props
+}: IconButtonProps) {
+  return (
+    <motion.button
+      whileTap={{ scale: 1.1 }}
+      transition={{ duration: 0.15 }}
+      className={clsx(
+        "border-box transition duration-150 hover:bg-slate-300 rounded-[100%] border-0 outline-none text-lg cursor-pointer flex items-center justify-center p-2",
+        className
+      )}
+      style={{
+        transform: `scale(${iconSizing[size]})`,
+      }}
+      {...props}
+    >
+      {children}
+    </motion.button>
+  );
+}
+
+const iconSizing = {
+  sm: 0.8,
+  base: 1,
+  lg: 1.2,
+  xl: 1.4,
+  "2xl": 1.6,
+  "3xl": 1.8,
+};
