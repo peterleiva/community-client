@@ -4,6 +4,7 @@ import {
   RiEyeLine as ShowIcon,
   RiEyeOffLine as HideIcon,
 } from "react-icons/ri";
+import { IconButton } from "components/Button";
 
 type PasswordProps = Omit<
   React.ComponentProps<typeof Input>,
@@ -20,24 +21,40 @@ export default function Password({
   hideAdornment,
   ...props
 }: PasswordProps) {
-  const { hide, toggle } = useToggle(show);
+  const { hidden, toggle } = useToggle(show);
 
-  const [type, Icon] = hide ? ["password", ShowIcon] : ["text", HideIcon];
-
-  const Decoration = () => {
-    if (hideAdornment) return null;
-
-    return (
-      <button className="flex" onClick={() => toggle()}>
-        <Icon />
-      </button>
-    );
-  };
+  const adornment = (
+    <Adornment hide={hideAdornment} active={!hidden} onTap={toggle} />
+  );
 
   const decorationProps = {
-    startDecoration: position === "left" ? <Decoration /> : null,
-    endDecoration: position === "right" ? <Decoration /> : null,
+    startDecoration: position === "left" ? adornment : null,
+    endDecoration: position === "right" ? adornment : null,
   };
 
-  return <Input type={type} {...props} {...decorationProps} />;
+  return (
+    <Input
+      type={hidden ? "password" : "text"}
+      {...props}
+      {...decorationProps}
+    />
+  );
+}
+
+interface AdornmentProps {
+  hide?: boolean;
+  onTap?: () => void;
+  active?: boolean;
+}
+
+function Adornment({ hide, onTap, active }: AdornmentProps) {
+  if (hide) return null;
+
+  const Icon = active ? HideIcon : ShowIcon;
+
+  return (
+    <IconButton className="flex" onTap={onTap}>
+      <Icon />
+    </IconButton>
+  );
 }

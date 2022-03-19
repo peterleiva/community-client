@@ -8,7 +8,7 @@ export default function useToggle(defaultValue = false) {
     setOn,
     turnOff: () => setOn(false),
     turnOn: () => setOn(true),
-    hide: !on,
+    hidden: !on,
     show: on,
     visible: on,
     on,
