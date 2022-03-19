@@ -5,6 +5,7 @@ import { GrClose as CloseIcon } from "react-icons/gr";
 import { GoAlert as AlertIcon } from "react-icons/go";
 import { MdInfo as InfoIcon, MdError as ErrorIcon } from "react-icons/md";
 import { BsFillCheckCircleFill as SuccessIcon } from "react-icons/bs";
+import { motion, type Variants } from "framer-motion";
 
 type ToastTheme = keyof typeof themes;
 
@@ -53,6 +54,17 @@ const CloseButton = (props: JSX.IntrinsicElements["button"]) => (
   </button>
 );
 
+const animation: Variants = {
+  hidden: {
+    opacity: 0,
+    x: "100vw",
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+  },
+};
+
 export default function Toast({
   theme = "info",
   title,
@@ -64,13 +76,18 @@ export default function Toast({
 }: ToastProps) {
   const [icon, { text: themeText }] = createTheme(theme);
 
-  const linkCss = clsx(themeText, "transition duration-150 hover:opacity-80");
-
   return (
-    <div
+    <motion.div
+      variants={animation}
+      initial="hidden"
+      animate="visible"
+      transition={{
+        type: "spring",
+        damping: 13,
+      }}
       className={clsx(
-        className,
-        "flex flex-row gap-3 relative rounded-lg border border-solid border-slate-200 bg-slate-50 py-5 pl-3 pr-8"
+        "relative flex flex-row gap-3 rounded-lg border border-solid border-slate-200 bg-slate-50 py-5 pl-3 pr-8",
+        className
       )}
     >
       <CloseButton className="absolute right-4 top-4" onClick={onClose} />
@@ -82,7 +99,7 @@ export default function Toast({
             overrides: {
               a: {
                 props: {
-                  className: linkCss,
+                  className: themeText,
                 },
               },
             },
@@ -92,13 +109,17 @@ export default function Toast({
         </Markdown>
         {linkTo && (
           <Link href={linkTo} passHref>
-            <a href="dummy" className={clsx(linkCss, "font-bold")}>
+            <motion.a
+              href="dummy"
+              className={clsx(themeText, "font-bold")}
+              whileHover={{ opacity: 0.7, transition: { duration: 0.15 } }}
+            >
               {linkLabel}
-            </a>
+            </motion.a>
           </Link>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
