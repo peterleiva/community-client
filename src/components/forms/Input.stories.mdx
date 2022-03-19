@@ -1,0 +1,87 @@
+import { Meta } from "@storybook/addon-docs";
+import TextInput from "./TextInput";
+import LengthAdornment from "./LengthAdornment";
+import {
+  CgProfile as ProfileIcon,
+  CgFormatText as FormatTextIcon,
+} from "react-icons/cg";
+import { VscDebugBreakpointFunction as PointIcon } from "react-icons/vsc";
+import PasswordInput from "./PasswordInput.tsx";
+
+<Meta title="docs/forms/Input" />
+
+<style>{`
+  .example {
+    padding: 2rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    border: 1px solid #cbd5e1;
+    border-radius: 1rem;
+  }
+`}</style>
+
+# Input
+
+Text inputs allow users to type and edit text fields, which usually appears in dialogs or forms.
+
+## Basic `TextInput`
+
+The [TextInput](?path=/docs/components-forms-input--text) field is a replacement for html input control for text fields including helper text, error message, and decorations.
+
+<div className="example">
+  <TextInput type="text" placeholder="text" />
+  <TextInput
+    type="text"
+    placeholder="first name"
+    helperText="Please, your first name"
+  />
+  <TextInput type="text" placeholder="disabled" disabled />
+</div>
+
+```jsx
+<TextInput type="text" placeholder="text" />
+<TextInput type="text" placeholder="first name" helperText="Please, your first name" />
+<TextInput type="text" placeholder="disabled" disabled />
+```
+
+## Password inputs
+
+[PasswordInput](?path=/docs/components-forms-input--password) are just like [TextInput](#basic-textinput) but they have an special toggle button which show or hide the current value from the password which can be hidden or replaced for complete new one
+
+<div className="example">
+  <PasswordInput />
+  <PasswordInput placeholder="text" show hideAdornment />
+  <PasswordInput placeholder="replaced" endDecoration={<ProfileIcon />} />
+</div>
+
+```jsx
+<PasswordInput />
+<PasswordInput placeholder="text" show hideAdornment />
+<PasswordInput placeholder="replaced" endDecoration={<ProfileIcon />} />
+```
+
+## Adornments
+
+Adornments are used to decorate the `TextInput` somehow. You can insert at the **start** or at the **end** with `startDecoration` and `endDecoration` respectively.
+
+<div className="example">
+  <TextInput type="number" startDecoration="$" />
+  <TextInput type="text" endDecoration={<LengthAdornment maxLength="30" />} />
+  <TextInput
+    type="text"
+    startDecoration={
+      <>
+        <ProfileIcon />
+        <PointIcon transform="rotate(90)" />
+      </>
+    }
+    endDecoration={<FormatTextIcon />}
+  />
+</div>
+
+```jsx
+<TextInput type="number" startDecoration="$" />
+<TextInput type="text" endDecoration={<LengthAdornment maxLength="30" />} />
+<TextInput type="text" startDecoration={<><ProfileIcon /><PointIcon transform="rotate(90)" /></> } endDecoration={<FormatTextIcon />}/>
+```
