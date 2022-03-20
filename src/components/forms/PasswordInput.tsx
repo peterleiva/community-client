@@ -24,7 +24,7 @@ export default function PasswordInput({
   const { hidden, toggle } = useToggle(show);
 
   const adornment = (
-    <Adornment hide={hideAdornment} active={!hidden} onTap={toggle} />
+    <PasswordAdornment hide={hideAdornment} active={!hidden} onTap={toggle} />
   );
 
   const decorationProps = {
@@ -35,8 +35,8 @@ export default function PasswordInput({
   return (
     <TextInput
       type={hidden ? "password" : "text"}
-      {...decorationProps}
       {...props}
+      {...decorationProps}
     />
   );
 }
@@ -47,7 +47,7 @@ interface AdornmentProps {
   active?: boolean;
 }
 
-function Adornment({ hide, onTap, active }: AdornmentProps) {
+export function PasswordAdornment({ hide, onTap, active }: AdornmentProps) {
   if (hide) return null;
 
   const Icon = active ? HideIcon : ShowIcon;
