@@ -80,8 +80,7 @@ export default function Button({
     );
   } else {
     return (
-      <button {...allProps} disabled>
-        {" "}
+      <button disabled={disabled} {...allProps}>
         <Content />
       </button>
     );
