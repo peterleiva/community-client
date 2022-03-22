@@ -1,10 +1,15 @@
 import { useCallback } from "react";
 import type { Maybe } from "types";
+import { type UseFormRegisterReturn } from "react-hook-form";
 import { FiAlertCircle as ErrorIcon } from "react-icons/fi";
 import clsx from "clsx";
 import useFocus from "./useFocus";
 
-type InputProps = JSX.IntrinsicElements["input"] & {
+type InputProps = React.ComponentPropsWithoutRef<"input"> & {
+  /**
+   * Register form with react-hook-form
+   */
+  register?: UseFormRegisterReturn;
   /**
    * text with more information about the input
    */
@@ -24,19 +29,25 @@ type InputProps = JSX.IntrinsicElements["input"] & {
 };
 
 export default function TextInput({
-  type = "text",
-  disabled,
   helperText,
   error,
   startDecoration = null,
   endDecoration = null,
   className,
+  register,
+  onFocus,
   ...props
 }: InputProps) {
-  const { focused, ref } = useFocus<HTMLInputElement>();
+  const { focused, focus, unfocus } = useFocus();
+  const { disabled } = props;
 
   const StartAdornment = useCallback(
-    () => (error ? <ErrorIcon /> : startDecoration),
+    () => (
+      <>
+        {error && <ErrorIcon className="text-red-500" />}
+        {startDecoration}
+      </>
+    ),
     [error, startDecoration]
   );
 
@@ -53,13 +64,17 @@ export default function TextInput({
       >
         <StartAdornment />
         <input
-          type={type}
-          ref={ref}
-          className={clsx(
-            "bg-transparent placeholder-slate-400 outline-none bg-none grow"
-          )}
-          disabled={disabled}
+          className="bg-transparent placeholder-slate-400 outline-none bg-none grow"
           {...props}
+          {...register}
+          onFocus={e => {
+            focus();
+            onFocus?.(e);
+          }}
+          onBlur={e => {
+            unfocus();
+            register?.onBlur(e);
+          }}
         />
         <EndAdornment />
       </div>
