@@ -6,6 +6,7 @@ import { GoAlert as AlertIcon } from "react-icons/go";
 import { MdInfo as InfoIcon, MdError as ErrorIcon } from "react-icons/md";
 import { BsFillCheckCircleFill as SuccessIcon } from "react-icons/bs";
 import { motion, type Variants } from "framer-motion";
+import useThrottle from "lib/useThrottle";
 
 type ToastTheme = keyof typeof themes;
 
@@ -25,6 +26,7 @@ interface ToastProps {
   description?: string;
   /**
    * where to get more information about the message
+   * TODO: change to action
    */
   linkTo?: string;
   /**
@@ -32,15 +34,15 @@ interface ToastProps {
    */
   linkLabel?: string;
   /**
-   * auto close the toast after expires the timeout
-   * @default false
+   * hide automatically the toast after expires the timeout, given by wait
+   * @default true
    */
-  autoClose?: boolean;
+  autohide?: boolean;
   /**
-   * @default 2_0000
    * specifiy the time in miliseconds to close the toast
+   * @default 5_0000
    */
-  timeout?: number;
+  wait?: number;
   /**
    * additional css classes to Toast container
    */
@@ -73,9 +75,11 @@ export default function Toast({
   linkLabel,
   className,
   onClose,
-  autoClose = true,
-  timeout = 2_000,
+  autohide = true,
+  wait = 5_000,
 }: ToastProps) {
+  useThrottle(() => autohide && onClose?.(), { wait });
+
   const [icon, { text: themeText }] = createTheme(theme);
 
   return (

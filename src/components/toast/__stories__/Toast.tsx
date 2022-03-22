@@ -5,6 +5,9 @@ import Details from "./Toast.md";
 export default {
   title: "components/Toast",
   component: Toast,
+  argTypes: {
+    onClose: { action: true },
+  },
   parameters: {
     backgrounds: {
       values: [
