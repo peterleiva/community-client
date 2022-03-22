@@ -11,14 +11,14 @@ type ToastTheme = keyof typeof themes;
 
 interface ToastProps {
   /**
-   * change toast theme
-   * @default "info"
-   */
-  theme: ToastTheme;
-  /**
    * header text which appears on top
    */
   title: string;
+  /**
+   * change toast theme
+   * @default "info"
+   */
+  theme?: ToastTheme;
   /**
    * more detailing about the reason the toast is appearing. Supports markdown
    */
@@ -73,6 +73,8 @@ export default function Toast({
   linkLabel,
   className,
   onClose,
+  autoClose = true,
+  timeout = 2_000,
 }: ToastProps) {
   const [icon, { text: themeText }] = createTheme(theme);
 
@@ -86,7 +88,7 @@ export default function Toast({
         damping: 13,
       }}
       className={clsx(
-        "relative flex flex-row gap-3 rounded-lg border border-solid border-slate-200 bg-slate-50 py-5 pl-3 pr-8",
+        "relative flex flex-row gap-3 rounded-lg border border-solid border-slate-200 bg-slate-50 py-5 pl-3 pr-12",
         className
       )}
     >
