@@ -20,6 +20,13 @@ Field.args = {
   required: false,
 };
 
+export const LengthField = Template.bind({});
+LengthField.args = {
+  ...Field.args,
+  showLength: true,
+  maxLength: 14,
+};
+
 export const WithError = Template.bind({});
 WithError.args = {
   label: "With Error",
