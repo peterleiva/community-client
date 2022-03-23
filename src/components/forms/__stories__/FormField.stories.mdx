@@ -1,0 +1,59 @@
+import { Meta } from "@storybook/addon-docs";
+import Form from "../Form";
+import TextField from "../TextField";
+import Button from "components/Button";
+
+<Meta title="docs/forms/FormField" />
+
+# Form Fields
+
+Form fields is an alternative of using [Input](?path=/story/docs-forms-input--page) directly. It's a custom Form element which can be used inside `Form` element and it represents a complete field with label, input and error messages.
+
+## `TextField`
+
+[TextField](?path=/story/components-forms-textfield--field) is an full custom element
+
+<div className="example">
+  <Form>
+    <TextField label="Name" name="name" />
+  </Form>
+</div>
+
+```js
+<Form>
+  <TextField label="Name" name="name" />
+</Form>
+```
+
+### Validations
+
+<div className="example">
+  <Form>
+    <TextField
+      label="Email"
+      type="email"
+      name="email"
+      placeholder="janedoe@example.org"
+      helperText="Tap Submit button, to see the error"
+      registerOptions={{ required: "email is required" }}
+    />
+    <div>
+      <Button>Submit</Button>
+    </div>
+
+  </Form>
+</div>
+
+```js
+<Form>
+  <TextField
+    label="Email"
+    type="email"
+    name="email"
+    placeholder="janedoe@example.org"
+    helperText="Tap Submit button, to see the error"
+    registerOptions={{ required: "email is required" }}
+  />
+  <Button>Submit</Button>
+</Form>
+```
