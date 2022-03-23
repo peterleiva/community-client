@@ -59,7 +59,8 @@ export default function TextInput({
         className={clsx(
           "flex flex-row flex-nowrap gap-2 items-center relative rounded-md border border-slate-300 bg-gray-50 p-2",
           { "bg-gray-300 text-zinc-300": disabled },
-          { "hover:border-slate-400 border-slate-400": focused }
+          { "border-slate-400": focused },
+          { "border-red-500": error }
         )}
       >
         <StartAdornment />
