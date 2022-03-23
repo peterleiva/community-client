@@ -24,7 +24,7 @@ export default function Field({
   errors = {},
 }: FieldProps) {
   return (
-    <div className="flex flex-col mx-3">
+    <div className="flex flex-col">
       <Label htmlFor={name} required={required}>
         {label}
       </Label>

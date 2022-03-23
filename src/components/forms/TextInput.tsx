@@ -87,5 +87,5 @@ export default function TextInput({
 const HelperText = ({ text }: { text?: string }) => {
   if (!text) return null;
 
-  return <small className="m-4 text-xs text-slate-500">{text}</small>;
+  return <small className="ml-2 text-xs text-slate-500">{text}</small>;
 };

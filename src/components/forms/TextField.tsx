@@ -44,7 +44,7 @@ export default function TextField({
           id={name}
           error={errors[name]}
           register={register(name, {
-            required: `${name} is required`,
+            required,
             max,
             maxLength,
             min,
