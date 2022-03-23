@@ -1,6 +1,6 @@
 import { type ComponentStory, type ComponentMeta } from "@storybook/react";
 import { screen, userEvent } from "@storybook/testing-library";
-import TextField from "../TextField";
+import { TextField } from "../TextField";
 import Form from "../Form";
 
 export default {

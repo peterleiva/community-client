@@ -6,10 +6,7 @@ import {
 } from "react-icons/ri";
 import { IconButton } from "components/Button";
 
-type PasswordInputProps = Omit<
-  React.ComponentProps<typeof TextInput>,
-  "startDecoration" | "endDecoration"
-> & {
+type PasswordInputProps = ElementProps<typeof TextInput> & {
   position?: "right" | "left";
   show?: boolean;
   hideAdornment?: boolean;
@@ -28,8 +25,17 @@ export default function PasswordInput({
   );
 
   const decorationProps = {
-    startDecoration: position === "left" ? adornment : null,
-    endDecoration: position === "right" ? adornment : null,
+    startDecoration: (
+      <>
+        {props?.startDecoration}
+        {position === "left" ? adornment : null}
+      </>
+    ),
+    endDecoration: (
+      <>
+        {props?.endDecoration} {position === "right" ? adornment : null}
+      </>
+    ),
   };
 
   return (

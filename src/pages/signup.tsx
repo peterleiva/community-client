@@ -1,5 +1,5 @@
 import { type NextPage } from "next";
-import { Form, TextField } from "components/forms";
+import { Form, TextField, PasswordField } from "components/forms";
 import Button from "components/Button";
 import { useToast } from "components/toast";
 import { BsArrowRight as RightIcon } from "react-icons/bs";
@@ -27,7 +27,7 @@ const SignUp: NextPage = () => {
       <h1>Sign Up</h1>
       <Form<FormData> onSubmit={submission} className="flex flex-col gap-4">
         <TextField name="email" label="Email" required />
-        <TextField
+        <PasswordField
           name="password"
           label="Password"
           autoComplete="current-password"
