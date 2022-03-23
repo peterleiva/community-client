@@ -10,9 +10,9 @@ type FormProps<TFormValues> = Omit<
   React.ComponentPropsWithoutRef<"form">,
   "onSubmit"
 > & {
-  children?: (
-    methods: UseFormReturn<TFormValues>
-  ) => React.ReactNode | React.ReactNode;
+  children?:
+    | { (methods: UseFormReturn<TFormValues>): React.ReactNode }
+    | React.ReactNode;
   onSubmit?: SubmitHandler<TFormValues>;
 };
 
@@ -21,7 +21,7 @@ export default function Form<TFieldValues = FieldValues>({
   children,
   ...formProps
 }: FormProps<TFieldValues>) {
-  const methods = useForm<TFieldValues>();
+  const methods = useForm<TFieldValues>({ criteriaMode: "all" });
   const { handleSubmit } = methods;
 
   return (
