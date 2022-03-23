@@ -1,45 +1,16 @@
 import { ComponentProps } from "react";
-import {
-  FieldErrors,
-  type RegisterOptions,
-  useFormContext,
-} from "react-hook-form";
-import Label from "./Label";
+import { type RegisterOptions, useFormContext } from "react-hook-form";
 import TextInput from "./TextInput";
-import { ErrorMessage } from "@hookform/error-message";
 import LengthAdornment from "./LengthAdornment";
+import BaseField, { type BaseFieldProps } from "./Field";
 import clsx from "clsx";
 
-type BaseFieldProps = {
-  name: string;
-  label?: string;
-  required?: boolean;
-  renderInput: JSX.Element;
-  errors?: FieldErrors;
-};
-function BaseField({
-  name,
-  label,
-  required,
-  renderInput,
-  errors = {},
-}: BaseFieldProps) {
-  return (
-    <div className="flex flex-col mx-3">
-      <Label htmlFor={name} required={required}>
-        {label}
-      </Label>
-      {renderInput}
-      <Errors name={name} errors={errors} />
-    </div>
-  );
-}
-
-type TextFieldProps = Omit<ComponentProps<typeof TextInput>, "register"> &
-  Omit<BaseFieldProps, "renderInput" | "errors"> & {
+type TextFieldProps = BaseFieldProps<
+  Omit<ComponentProps<typeof TextInput>, "register"> & {
     registerOptions?: RegisterOptions;
     showLength?: boolean;
-  };
+  }
+>;
 
 export default function TextField({
   name,
@@ -67,6 +38,7 @@ export default function TextField({
       label={label}
       required={required}
       name={name}
+      errors={errors}
       renderInput={
         <TextInput
           id={name}
@@ -122,23 +94,6 @@ const LengthField = ({ value, maxLength, show }: LengthFieldProps) => {
           value.length > 0 &&
           (!maxLength || value.length <= maxLength),
       })}
-    />
-  );
-};
-
-const Errors = ({ errors, name }: { name: string; errors: FieldErrors }) => {
-  return (
-    <ErrorMessage
-      name={name}
-      errors={errors}
-      render={({ messages }) =>
-        messages &&
-        Object.entries(messages).map(([type, message]) => (
-          <p key={type} className="text-red-500">
-            {message}
-          </p>
-        ))
-      }
     />
   );
 };
