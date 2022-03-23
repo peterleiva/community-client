@@ -7,6 +7,7 @@ import { MdInfo as InfoIcon, MdError as ErrorIcon } from "react-icons/md";
 import { BsFillCheckCircleFill as SuccessIcon } from "react-icons/bs";
 import { motion, type Variants } from "framer-motion";
 import useThrottle from "lib/useThrottle";
+import { IconButton } from "components/Button";
 
 type ToastTheme = keyof typeof themes;
 
@@ -50,12 +51,6 @@ interface ToastProps {
   onClose?: () => void;
 }
 
-const CloseButton = (props: JSX.IntrinsicElements["button"]) => (
-  <button {...props}>
-    <CloseIcon />
-  </button>
-);
-
 const animation: Variants = {
   hidden: {
     opacity: 0,
@@ -96,7 +91,9 @@ export default function Toast({
         className
       )}
     >
-      <CloseButton className="absolute right-4 top-4" onClick={onClose} />
+      <IconButton className="absolute right-4 top-4" onClick={onClose}>
+        <CloseIcon />
+      </IconButton>
       <div className="-mt-2">{icon}</div>
       <div className="flex flex-col gap-1">
         <h1 className="text-base text-slate-700 m-0">{title}</h1>
