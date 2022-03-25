@@ -26,15 +26,15 @@ export default function PasswordInput({
 
   const decorationProps = {
     startDecoration: (
-      <>
+      <span className="flex gap-4 justify-between">
         {props?.startDecoration}
         {position === "left" ? adornment : null}
-      </>
+      </span>
     ),
     endDecoration: (
-      <>
-        {props?.endDecoration} {position === "right" ? adornment : null}
-      </>
+      <span className="flex gap-4 justify-between">
+        {position === "right" ? adornment : null} {props?.endDecoration}
+      </span>
     ),
   };
 

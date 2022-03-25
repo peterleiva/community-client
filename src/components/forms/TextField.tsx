@@ -1,21 +1,27 @@
-import React, { ComponentProps } from "react";
 import { type RegisterOptions, useFormContext } from "react-hook-form";
 import TextInput from "./TextInput";
+import PasswordInput from "./PasswordInput";
 import LengthAdornment from "./LengthAdornment";
 import BaseField, { type BaseFieldProps } from "./Field";
+import { IconButton } from "components/Button";
+import { GrClose as CloseIcon } from "react-icons/gr";
 import clsx from "clsx";
-import PasswordInput from "./PasswordInput";
 
 type TextFieldProps = BaseFieldProps<
-  Omit<ComponentProps<typeof TextInput>, "register"> & {
+  Omit<React.ComponentProps<typeof TextInput>, "register"> & {
     registerOptions?: RegisterOptions;
     showLength?: boolean;
   }
 >;
 
-function WithTextField<
-  T extends React.ComponentType<ElementProps<typeof TextInput>>
->(Input: T = TextInput) {
+type WithTextFieldProps = BaseFieldProps<ElementProps<typeof TextInput>> & {
+  registerOptions?: RegisterOptions;
+  showLength?: boolean;
+};
+
+function WithTextField(
+  Input: React.ComponentType<typeof TextInput> = TextInput
+) {
   return function TextField({
     name,
     label,
@@ -24,17 +30,19 @@ function WithTextField<
     maxLength,
     min,
     minLength,
-    value,
     registerOptions,
     showLength,
     ...inputProps
   }: TextFieldProps) {
     const { disabled, onBlur, onChange } = inputProps;
     const {
+      resetField,
       formState: { errors },
       register,
       watch,
     } = useFormContext();
+
+    const value = watch(name);
 
     return (
       <BaseField
@@ -55,18 +63,20 @@ function WithTextField<
               disabled,
               onBlur,
               onChange,
-              value,
               ...registerOptions,
             })}
             endDecoration={
-              <>
-                <LengthField
+              <span className="flex gap-4">
+                <LengthFieldAdornment
                   show={showLength}
                   maxLength={maxLength}
-                  value={watch(name)}
+                  value={value}
                 />
                 {inputProps?.endDecoration}
-              </>
+                {value && value.length >= 0 && (
+                  <ResetButton onReset={() => resetField(name)} />
+                )}
+              </span>
             }
             {...inputProps}
           />
@@ -76,68 +86,14 @@ function WithTextField<
   };
 }
 
+const ResetButton = ({ onReset }: { onReset: () => void }) => (
+  <IconButton onClick={onReset}>
+    <CloseIcon />
+  </IconButton>
+);
+
 export const TextField = WithTextField();
 export const PasswordField = WithTextField(PasswordInput);
-
-// export default function TextField({
-//   name,
-//   label,
-//   registerOptions = {},
-//   required,
-//   max,
-//   min,
-//   maxLength,
-//   minLength,
-//   showLength,
-//   value,
-//   ...inputProps
-// }: TextFieldProps) {
-//   const { disabled, onBlur, onChange } = inputProps;
-
-//   const {
-//     formState: { errors },
-//     register,
-//     watch,
-//   } = useFormContext();
-
-//   return (
-//     <BaseField
-//       label={label}
-//       required={required}
-//       name={name}
-//       errors={errors}
-//       renderInput={
-//         <TextInput
-//           id={name}
-//           error={errors[name]}
-//           register={register(name, {
-//             required,
-//             max,
-//             maxLength,
-//             min,
-//             minLength,
-//             disabled,
-//             onBlur,
-//             onChange,
-//             value,
-//             ...registerOptions,
-//           })}
-//           endDecoration={
-//             <>
-//               <LengthField
-//                 show={showLength}
-//                 maxLength={maxLength}
-//                 value={watch(name)}
-//               />
-//               {inputProps?.endDecoration}
-//             </>
-//           }
-//           {...inputProps}
-//         />
-//       }
-//     />
-//   );
-// }
 
 type LengthFieldProps = {
   value?: string;
@@ -145,14 +101,14 @@ type LengthFieldProps = {
   show?: boolean;
 };
 
-const LengthField = ({ value, maxLength, show }: LengthFieldProps) => {
+const LengthFieldAdornment = ({ value, maxLength, show }: LengthFieldProps) => {
   if (!show) return null;
 
   return (
     <LengthAdornment
       value={value}
       maxLength={maxLength}
-      className={clsx({
+      classesEnd={clsx({
         "text-red-500": maxLength && value && value.length > maxLength,
       })}
       classesStart={clsx({
