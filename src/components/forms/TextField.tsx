@@ -7,20 +7,16 @@ import { IconButton } from "components/Button";
 import { GrClose as CloseIcon } from "react-icons/gr";
 import clsx from "clsx";
 
-type TextFieldProps = BaseFieldProps<
-  Omit<React.ComponentProps<typeof TextInput>, "register"> & {
-    registerOptions?: RegisterOptions;
-    showLength?: boolean;
-  }
->;
+type TextFieldProps<T extends React.ComponentProps<typeof TextInput>> =
+  BaseFieldProps<Omit<T, "register">>;
 
-type WithTextFieldProps = BaseFieldProps<ElementProps<typeof TextInput>> & {
+type WithTextFieldProps = {
   registerOptions?: RegisterOptions;
   showLength?: boolean;
 };
 
-function WithTextField(
-  Input: React.ComponentType<typeof TextInput> = TextInput
+function WithTextField<TProps extends React.ComponentProps<typeof TextInput>>(
+  Input: React.ComponentType<TProps> = TextInput
 ) {
   return function TextField({
     name,
@@ -33,7 +29,7 @@ function WithTextField(
     registerOptions,
     showLength,
     ...inputProps
-  }: TextFieldProps) {
+  }: WithTextFieldProps & TextFieldProps<TProps>) {
     const { disabled, onBlur, onChange } = inputProps;
     const {
       resetField,
@@ -78,7 +74,7 @@ function WithTextField(
                 )}
               </span>
             }
-            {...inputProps}
+            {...(inputProps as TProps)}
           />
         }
       />
