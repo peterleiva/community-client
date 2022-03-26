@@ -3,8 +3,6 @@ import TextInput from "./TextInput";
 import PasswordInput from "./PasswordInput";
 import LengthAdornment from "./LengthAdornment";
 import BaseField, { type BaseFieldProps } from "./Field";
-import { IconButton } from "components/Button";
-import { GrClose as CloseIcon } from "react-icons/gr";
 import clsx from "clsx";
 
 type TextFieldProps<T extends React.ComponentProps<typeof TextInput>> =
@@ -32,7 +30,6 @@ function WithTextField<TProps extends React.ComponentProps<typeof TextInput>>(
   }: WithTextFieldProps & TextFieldProps<TProps>) {
     const { disabled, onBlur, onChange } = inputProps;
     const {
-      resetField,
       formState: { errors },
       register,
       watch,
@@ -62,17 +59,14 @@ function WithTextField<TProps extends React.ComponentProps<typeof TextInput>>(
               ...registerOptions,
             })}
             endDecoration={
-              <span className="flex gap-4">
+              <>
                 <LengthFieldAdornment
                   show={showLength}
                   maxLength={maxLength}
                   value={value}
                 />
                 {inputProps?.endDecoration}
-                {value && value.length >= 0 && (
-                  <ResetButton onReset={() => resetField(name)} />
-                )}
-              </span>
+              </>
             }
             {...(inputProps as TProps)}
           />
@@ -81,12 +75,6 @@ function WithTextField<TProps extends React.ComponentProps<typeof TextInput>>(
     );
   };
 }
-
-const ResetButton = ({ onReset }: { onReset: () => void }) => (
-  <IconButton onClick={onReset}>
-    <CloseIcon />
-  </IconButton>
-);
 
 export const TextField = WithTextField();
 export const PasswordField = WithTextField(PasswordInput);

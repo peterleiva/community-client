@@ -89,3 +89,9 @@ const HelperText = ({ text }: { text?: string }) => {
 
   return <small className="ml-2 text-xs text-slate-500">{text}</small>;
 };
+
+export const InputAdornment = ({
+  children,
+}: {
+  children?: React.ReactNode;
+}) => <div className="flex justify-between gap-4 items-center">{children}</div>;

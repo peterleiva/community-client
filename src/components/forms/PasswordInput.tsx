@@ -1,5 +1,5 @@
 import { useToggle } from "lib";
-import TextInput from "./TextInput";
+import TextInput, { InputAdornment } from "./TextInput";
 import {
   RiEyeLine as ShowIcon,
   RiEyeOffLine as HideIcon,
@@ -26,15 +26,16 @@ export default function PasswordInput({
 
   const decorationProps = {
     startDecoration: (
-      <span className="flex gap-4 justify-between">
+      <InputAdornment>
         {props?.startDecoration}
-        {position === "left" ? adornment : null}
-      </span>
+        {position === "left" && adornment}
+      </InputAdornment>
     ),
     endDecoration: (
-      <span className="flex gap-4 justify-between">
-        {position === "right" ? adornment : null} {props?.endDecoration}
-      </span>
+      <InputAdornment>
+        {position === "right" && adornment}
+        {props?.endDecoration}
+      </InputAdornment>
     ),
   };
 
@@ -59,7 +60,7 @@ export function PasswordAdornment({ hide, onTap, active }: AdornmentProps) {
   const Icon = active ? HideIcon : ShowIcon;
 
   return (
-    <IconButton className="flex" onTap={onTap}>
+    <IconButton onTap={onTap}>
       <Icon />
     </IconButton>
   );

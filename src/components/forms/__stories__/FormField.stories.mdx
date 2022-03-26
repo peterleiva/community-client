@@ -1,9 +1,10 @@
 import { Meta } from "@storybook/addon-docs";
 import Form from "../Form";
-import { TextField } from "../TextField";
+import { TextField, PasswordField } from "../TextField";
 import Button from "components/Button";
+import { AiOutlineAlert as AlertIcon } from "react-icons/ai";
 
-<Meta title="docs/forms/FormField" />
+<Meta title="docs/forms/Fields" />
 
 # Form Fields
 
@@ -14,18 +15,36 @@ Form fields is an alternative of using [Input](?path=/story/docs-forms-input--pa
 [TextField](?path=/story/components-forms-textfield--field) is an full custom element
 
 <div className="example">
-  <Form>
+  <Form className="flex gap-4 items-end">
     <TextField label="Name" name="name" />
+    <TextField name="name" />
   </Form>
 </div>
 
 ```js
 <Form>
   <TextField label="Name" name="name" />
+  <TextField name="name" />
 </Form>
 ```
 
-### Validations
+## `PasswordField`
+
+TextField can compose others components with the help of `Field` component. PasswordField is one of them. It's represents an text field for passwords. There's a adornment for hidden or show the password already built-in.
+
+<div className="example">
+  <Form>
+    <PasswordField name="password" label="Password" />
+  </Form>
+</div>
+
+```js
+<Form>
+  <PasswordField name="password" label="Password" />
+</Form>
+```
+
+## Validations
 
 <div className="example">
   <Form>
@@ -56,4 +75,31 @@ Form fields is an alternative of using [Input](?path=/story/docs-forms-input--pa
   />
   <Button>Submit</Button>
 </Form>
+```
+
+## Adornments
+
+This can be useful to add a prefix, suffix or action buttons.
+
+<div className="example">
+  <Form className="flex gap-4">
+    <TextField label="Icon" name="adornment" endDecoration={<AlertIcon />} />
+  </Form>
+</div>
+
+### Length
+
+We have a built-in [Length adornment](?path=/docs/components-forms-textfield--length-field) which can be used to, in real time, watch text field length. They can receive `maxLength` value to define a upperlimit as well
+
+<div className="example">
+  <Form className="flex gap-4">
+    <TextField id="Length" name="length-adornment" showLength />
+    <TextField id="Length" name="length-maxLength" showLength maxLength="14" />
+
+  </Form>
+</div>
+
+```js
+<TextField id="Length" showLength />
+<TextField id="Length" showLength maxLength="14" />
 ```
