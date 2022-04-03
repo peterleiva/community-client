@@ -26,12 +26,19 @@ const SignUp: NextPage = () => {
     <div className="w-3/4 mx-auto">
       <h1>Sign Up</h1>
       <Form<FormData> onSubmit={submission} className="flex flex-col gap-4">
-        <TextField name="email" label="Email" required />
+        <TextField
+          name="email"
+          label="Email"
+          autoComplete="email"
+          required
+          registerOptions={{ required: "email is required" }}
+        />
         <PasswordField
           name="password"
           label="Password"
-          autoComplete="current-password"
+          autoComplete="new-password"
           required
+          registerOptions={{ required: "password is required" }}
         />
         <div className="flex justify-end">
           <Button type="submit" endIcon={<RightIcon />}>
