@@ -1,7 +1,20 @@
 import { Meta } from "@storybook/addon-docs";
+import { ToastProvider } from "../context";
+import Button from "components/Button";
+import { useToast } from "../context";
+import Bar from "./Bar";
 
-<Meta title="docs/Toast" />
+<Meta
+  title="docs/Toast"
+  decorators={[story => <ToastProvider>{story()}</ToastProvider>]}
+/>
 
 # Toast
 
 [Toasts](?path=/story/components-toast--success) are shown as a floating box typically in the top right of the page. They can optionally be displayed on other edges of the screen (top-left, top-center, bottom-left, bottom-center, or bottom-right). Toasts provide limited space for content, and therefore the content must be short and concise, providing immediate feedback in response to a user action or informing users of a process that the app has performed or will perform. Disappear automatically or can be dismissed by the user.
+
+<div>
+  <ToastProvider>
+    <Bar />
+  </ToastProvider>
+</div>

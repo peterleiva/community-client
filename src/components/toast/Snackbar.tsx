@@ -16,9 +16,12 @@ export default function Snackbar({ position = "bottom" }: ToastStackProps) {
 
   return (
     <div
-      className={clsx("absolute z-50 overflow-hidden", positioning[position])}
+      className={clsx(
+        "fixed z-50 w-screen overflow-x-hidden overflow-y-visible",
+        positioning[position]
+      )}
     >
-      <ul className={clsx("flex flex-col gap-4")}>
+      <ul className={clsx("flex flex-col-reverse gap-4 w-[80vw]")}>
         {messages.map(({ id, ...message }) => (
           <li key={id}>
             <Toast
@@ -33,6 +36,6 @@ export default function Snackbar({ position = "bottom" }: ToastStackProps) {
 }
 
 const positioning = {
-  bottom: "bottom-4 left-1/2",
+  bottom: "bottom-4",
   // "bottom-right": "bottom-4 right-10 flex-col-reverse",
 };

@@ -3,7 +3,7 @@ import { ToastProvider } from "../context";
 import Snackbar from "../Snackbar";
 
 export default {
-  title: "pages/ToastStack",
+  title: "pages/Snackbar",
   component: Snackbar,
   decorators: [story => <ToastProvider>{story()}</ToastProvider>],
 } as ComponentMeta<typeof Snackbar>;
