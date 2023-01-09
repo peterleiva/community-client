@@ -33,7 +33,7 @@
     "graphql": "^15.8.0",
     "intersection-observer": "^0.12.0",
     "invariant": "^2.2.4",
-    "luxon": "^2.3.0",
+    "luxon": "^2.5.2",
     "markdown-to-jsx": "^7.1.7",
     "next": "^12.1.0",
     "ramda": "^0.28.0",
