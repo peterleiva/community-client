@@ -24,7 +24,7 @@
     "chromatic": "npx chromatic --project-token=1ca6cbfec356"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.8",
+    "@apollo/client": "^3.7.17",
     "@graphql-codegen/cli": "^2.6.2",
     "@hookform/error-message": "^2.0.0",
     "clsx": "^1.1.1",
